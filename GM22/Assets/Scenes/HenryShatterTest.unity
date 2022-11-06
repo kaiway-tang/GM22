@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1580,12 +1580,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1765305973901314743, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765305973901314743, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.708
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765305973901314743, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3947312720235467554, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947312720235467555, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: core
+      value: 
+      objectReference: {fileID: 8679961166559624952, guid: ddd9ba35e5bd54fc8ab9fb236470b8c2, type: 3}
+    - target: {fileID: 4160929013305815158, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160929013305815158, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160929013305815158, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435056818774100376, guid: 71986d2950b67455f81c7571c68822cf, type: 3}
       propertyPath: m_RootOrder
