@@ -35,12 +35,18 @@ public class PlayerController : MonoBehaviour
         {
             // Using isometric to test, will change later
             Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+            bool notMoving = direction.magnitude == 0;
+
+            direction = (Input.GetAxis("Horizontal") * transform.right * Time.deltaTime + Input.GetAxis("Vertical") * transform.forward).normalized;
 
             // Always face direction of movement
-            if (direction != Vector3.zero) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
+            if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
-            rb.velocity = direction * speed;
+            if (!notMoving)
+                rb.velocity = direction * speed;
+            else
+                rb.velocity = Vector3.zero;
         } else
         {
             rb.velocity = Vector3.zero;
