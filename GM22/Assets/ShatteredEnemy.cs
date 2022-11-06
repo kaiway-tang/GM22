@@ -9,9 +9,15 @@ public class ShatteredEnemy : MonoBehaviour
     {
         List<Transform> transformList = new List<Transform>();
 
+        Vector3 dir = Vector3.zero;
+
         foreach (Transform child in transform)
         {
-            child.GetComponent<Rigidbody>().AddExplosionForce(1000f, child.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)), 10f, Random.Range(-10, 10));
+            dir.x = Random.Range(-2, 2);
+            dir.y = Random.Range(-2, 2);
+            dir.z = Random.Range(-2, 2);
+
+            child.GetComponent<Rigidbody>().AddExplosionForce(300f, child.position + dir, 10f, Random.Range(-10, 10));
         }
         
     }
