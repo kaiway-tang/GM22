@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyShatter : MonoBehaviour
 {
     [SerializeField] GameObject shatteredEnemy;
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == 6)
+        if (other.gameObject.layer == 6)
         { // collided with player
             Instantiate(shatteredEnemy, transform.position, Quaternion.identity);
             Destroy(gameObject);
