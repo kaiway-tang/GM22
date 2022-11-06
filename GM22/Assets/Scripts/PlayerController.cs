@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
             bool notMoving = direction.magnitude == 0;
 
-            direction = (Input.GetAxis("Horizontal") * transform.right * Time.deltaTime + Input.GetAxis("Vertical") * transform.forward).normalized;
+            direction = (Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward).normalized;
 
             // Always face direction of movement
-            if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
+            // if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
             if (!notMoving)
@@ -66,34 +66,41 @@ public class PlayerController : MonoBehaviour
         if (comboCountdown > 0 && !swinging)
         {
             comboCountdown -= Time.deltaTime;
+        } 
+
+        if (comboCountdown <= 0)
+        {
+            comboCountdown = 0;
+            comboNum = 0;
         }
     }
 
     void Attack()
     {
         // If already swinging, don't do anything
-        if (swinging)
-            return;
+        if (!swinging)
+        {
 
-        // Use a counter to dictate which swing to use
-        // Start a timer to count down. When the timer runs out, the counter resets
-        if (comboCountdown <= 0)
-        {
-            comboCountdown = 0;
-            comboNum = 0;
-        } else
-        {
-            comboNum++;
-            if (comboNum > 2) // Combo resets 
+            // Use a counter to dictate which swing to use
+            // Start a timer to count down. When the timer runs out, the counter resets
+            if (comboCountdown <= 0)
             {
-                comboNum = 0;
+                
             }
+            else
+            {
+                comboNum++;
+                //if (comboNum > 2) // Combo resets 
+                //{
+                //    comboNum = 0;
+                //}
+            }
+
+            // Increment the counter when a swing happens, and reset the timer
+            StartCoroutine("Swing");
+
+            // Jump to each swing's mechanics based on the counter
         }
-
-        // Increment the counter when a swing happens, and reset the timer
-        StartCoroutine("Swing");
-
-        // Jump to each swing's mechanics based on the counter
     }
 
     IEnumerator Swing()
@@ -115,7 +122,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         // Unset flag
         swinging = false;
-        comboCountdown = comboWindow;
+        if (comboNum == 2)
+        {
+            comboNum = 0;
+            comboCountdown = 0;
+            // anim.Play("Idle");
+        } else 
+            comboCountdown = comboWindow;
         // yield return new WaitForEndOfFrame();
     }
 
