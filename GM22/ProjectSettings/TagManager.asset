@@ -11,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerHB
+  - PlayerAtk
+  - EnemyHB
+  - EnemyAtk
+  - NeutralAtk
+  - Terrain
+  - VFX
   - 
   - 
   - 
