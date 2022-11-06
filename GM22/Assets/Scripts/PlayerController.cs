@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The mesh object that is moving in the animations. We use this to set the position of the transform.")]
     [SerializeField] GameObject animObject;
     [SerializeField] GameObject cam;
+    [SerializeField] GameObject slashVFX;
 
     bool swinging = false;
 
@@ -57,6 +58,16 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
             
+    }
+
+    public void ActivateSlash()
+    {
+        slashVFX.SetActive(true);
+    }
+
+    public void DeactivateSlash()
+    {
+        slashVFX.SetActive(false);
     }
 
     public void ResetCombo()
