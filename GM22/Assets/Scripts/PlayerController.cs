@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             // anim.Play("2-Hand Swing0");
-            Attack();
+            // Attack();
+            anim.SetBool("Combo", true);
         }
             
 
@@ -114,12 +115,15 @@ public class PlayerController : MonoBehaviour
         // wait(?)
         // Activate collider
         // Wait
-        float len = anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        // Debug.Log("Time: " + len);
+        float len = anim.GetCurrentAnimatorStateInfo(0).length - anim.GetNextAnimatorStateInfo(0).length;
+        Debug.Log("Time: " + len);
+
+        // yield return new WaitForSeconds(len);
+
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle"));
         // Deactivate collider
         // Wait for end lag 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         // Unset flag
         swinging = false;
         if (comboNum == 2)
@@ -131,6 +135,12 @@ public class PlayerController : MonoBehaviour
             comboCountdown = comboWindow;
         // yield return new WaitForEndOfFrame();
     }
+
+    public void ResetCombo()
+    {
+        anim.SetBool("Combo", false);
+    }
+
 
     public void Readjust()
     {
