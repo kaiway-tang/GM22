@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("Amount of time in seconds before a slash combo is reset.")]
     [SerializeField] float comboWindow = 2f;
-    float comboCountdown = 0f;
+    [SerializeField] float comboCountdown = 0f;
     [SerializeField] int comboNum = 0;
     bool swinging = false;
 
@@ -31,15 +31,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!swinging)
+        {
+            // Using isometric to test, will change later
+            Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
-        // Using isometric to test, will change later
-        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-        
-        // Always face direction of movement
-        if (direction != Vector3.zero) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
+            // Always face direction of movement
+            if (direction != Vector3.zero) transform.forward = Vector3.Lerp(transform.forward, direction, 0.6f);
 
-        // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
-        rb.velocity = direction * speed;
+            // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
+            rb.velocity = direction * speed;
+        } else
+        {
+            rb.velocity = Vector3.zero;
+        }
 
         // Control movement animation
         anim.SetBool("Moving", rb.velocity.magnitude != 0);
@@ -88,7 +93,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Swing()
     {
         // Maybe a coroutine? Prob a good idea tbh
-
+        Debug.Log("Firing");
         // Set flag to start swing 
         swinging = true;
         // Start animation
@@ -97,11 +102,11 @@ public class PlayerController : MonoBehaviour
         // Activate collider
         // Wait
         float len = anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        Debug.Log("Time: " + len);
+        // Debug.Log("Time: " + len);
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle"));
         // Deactivate collider
         // Wait for end lag 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         // Unset flag
         swinging = false;
         comboCountdown = comboWindow;
