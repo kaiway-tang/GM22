@@ -2560,6 +2560,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4610751073264686868}
     m_Modifications:
+    - target: {fileID: 100002, guid: d096c2dbc4ba8b344a7752253f0049ad, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: d096c2dbc4ba8b344a7752253f0049ad, type: 3}
       propertyPath: m_Name
       value: Broadsword w_ Colliders
@@ -2607,6 +2611,10 @@ PrefabInstance:
     - target: {fileID: 400004, guid: d096c2dbc4ba8b344a7752253f0049ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 64.027
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500002, guid: d096c2dbc4ba8b344a7752253f0049ad, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d096c2dbc4ba8b344a7752253f0049ad, type: 3}

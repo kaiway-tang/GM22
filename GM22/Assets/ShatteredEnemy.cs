@@ -11,7 +11,6 @@ public class ShatteredEnemy : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            Debug.Log(child);
             child.GetComponent<Rigidbody>().AddExplosionForce(1000f, child.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)), 10f, Random.Range(-10, 10));
         }
         
