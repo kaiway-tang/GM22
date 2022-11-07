@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         // Control movement animation
         anim.SetBool("Moving", rb.velocity.magnitude > 0.05f);
 
-        if (attackInputAction.IsPressed())
+        if (attackInputAction.triggered)
         {
             anim.SetBool("Combo", true);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
