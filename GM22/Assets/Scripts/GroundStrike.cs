@@ -46,6 +46,6 @@ public class GroundStrike : MonoBehaviour
             t -= slowRate;
             yield return new WaitForSeconds(0.1f);
         }
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

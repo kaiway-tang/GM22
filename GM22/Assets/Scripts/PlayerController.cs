@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The mesh object that is moving in the animations. We use this to set the position of the transform.")]
     [SerializeField] GameObject animObject;
     [SerializeField] GameObject cam;
-    [SerializeField] GameObject slashVFX;
+    [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
 
     int charge = 0;
@@ -83,14 +83,14 @@ public class PlayerController : MonoBehaviour
             
     }
 
-    public void ActivateSlash()
+    public void ActivateSlash(int index)
     {
-        slashVFX.SetActive(true);
+        slashVFX[index].SetActive(true);
     }
 
-    public void DeactivateSlash()
+    public void DeactivateSlash(int index)
     {
-        slashVFX.SetActive(false);
+        slashVFX[index].SetActive(false);
     }
 
     public void ResetCombo()
