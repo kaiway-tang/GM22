@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject animObject;
     [SerializeField] GameObject cam;
     [SerializeField] GameObject slashVFX;
+    [SerializeField] GameObject strikeVFX;
 
+    int charge = 0;
     bool swinging = false;
 
     // Start is called before the first frame update
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Combo", true);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            SpawnStrike();
         }
             
     }
@@ -109,4 +112,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
     }
+
+    public void SpawnStrike()
+    {
+        Instantiate(strikeVFX, transform.position, transform.rotation);
+    }
+
 }
