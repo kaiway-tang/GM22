@@ -51,7 +51,7 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""id"": ""204102cd-919b-4503-9c02-a2e2f349a144"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 }
             ],
