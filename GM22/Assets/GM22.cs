@@ -53,24 +53,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ChargeAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""81c6a3a9-4f5e-4e84-b694-1a4d5e9d548f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ChargeAttackRelease"",
-                    ""type"": ""Button"",
-                    ""id"": ""315a3a94-0c0d-4eaa-b7b2-6ea38b6ba6a9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,116 +273,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fcad2737-823f-4833-8361-e85b4a6cc3e6"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ChargeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7ab92916-6ada-4ddb-b60b-ec499577fc09"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ChargeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6e34dc56-dc73-41de-8431-93a7b14c5292"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""ChargeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cde89e4e-3e6d-44b1-a41f-831ee2efa621"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""ChargeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5684756b-e490-4bd4-8302-0e4a5d3d3deb"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""ChargeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""665dd984-fb56-4cb8-8788-a8b06c79d853"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ChargeAttackRelease"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6c5f6966-7230-4185-bdb0-ee4ac8631d23"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ChargeAttackRelease"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4214fee5-1eaf-497d-abce-6f1c25ee4c4f"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""ChargeAttackRelease"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c73ffbf7-d55b-40e8-8c87-c36931b45945"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""ChargeAttackRelease"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a1b01b05-74a9-4cea-a8a3-1cf3f5a3b6a5"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""ChargeAttackRelease"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -991,8 +863,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_ChargeAttack = m_Player.FindAction("ChargeAttack", throwIfNotFound: true);
-        m_Player_ChargeAttackRelease = m_Player.FindAction("ChargeAttackRelease", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1067,8 +937,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_ChargeAttack;
-    private readonly InputAction m_Player_ChargeAttackRelease;
     public struct PlayerActions
     {
         private @GM22 m_Wrapper;
@@ -1076,8 +944,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @ChargeAttack => m_Wrapper.m_Player_ChargeAttack;
-        public InputAction @ChargeAttackRelease => m_Wrapper.m_Player_ChargeAttackRelease;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1096,12 +962,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @ChargeAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttack;
-                @ChargeAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttack;
-                @ChargeAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttack;
-                @ChargeAttackRelease.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttackRelease;
-                @ChargeAttackRelease.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttackRelease;
-                @ChargeAttackRelease.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeAttackRelease;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1115,12 +975,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @ChargeAttack.started += instance.OnChargeAttack;
-                @ChargeAttack.performed += instance.OnChargeAttack;
-                @ChargeAttack.canceled += instance.OnChargeAttack;
-                @ChargeAttackRelease.started += instance.OnChargeAttackRelease;
-                @ChargeAttackRelease.performed += instance.OnChargeAttackRelease;
-                @ChargeAttackRelease.canceled += instance.OnChargeAttackRelease;
             }
         }
     }
@@ -1280,8 +1134,6 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnChargeAttack(InputAction.CallbackContext context);
-        void OnChargeAttackRelease(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
