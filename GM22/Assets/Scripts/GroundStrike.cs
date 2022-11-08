@@ -8,6 +8,7 @@ public class GroundStrike : MonoBehaviour
     [SerializeField] float speed = 10f;
     [Tooltip("Height this strike will check to find a ground and warp to. If it finds nothing, it will move to y=0.")]
     [SerializeField] float detectionDistance = 2f;
+    [SerializeField] LayerMask layers;
 
     [SerializeField] float slowRate = 0.1f;
 
@@ -20,7 +21,7 @@ public class GroundStrike : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         // Set initial travel speed
-        rb.velocity = transform.forward * 10f;
+        rb.velocity = transform.forward * speed;
         StartCoroutine(Decelerate());
     }
 
@@ -28,7 +29,7 @@ public class GroundStrike : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out hit, detectionDistance))
+        if (Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
         {
             transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
         } else

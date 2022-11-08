@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject strikeVFX;
 
     int charge = 0;
+    int maxStage = 3;
+    float holdTime = 0;  // Mouse held time in seconds
+    [Tooltip("Hold time needed to initiate charge attack.")] [SerializeField] float holdTimeForCharge = 0.5f;
+    [Tooltip("Time required to charge up 1 state")] [SerializeField] float timePerChargePhase = 1f;
     bool swinging = false;
 
     // Start is called before the first frame update
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
         } else
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.angularVelocity = Vector3.zero;
         }
 
         // Control movement animation
@@ -76,12 +81,29 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Combo", true);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            SpawnStrike();
+            // SpawnStrike();  // Purely testing
         }
 
+        // True or false based on if it's pressed the current frame
         if (attackInputAction.IsPressed())
         {
-            
+            holdTime += Time.deltaTime;
+            if (holdTime > holdTimeForCharge)
+            {
+                anim.SetBool("Charge", true);
+                charge = (int) ((holdTime - holdTimeForCharge) / timePerChargePhase);
+            }
+            // Debug.Log(holdTime);
+        } else
+        {
+            if (holdTime > holdTimeForCharge)
+            {
+                anim.SetBool("Charge", false);
+                holdTime = 0;
+            } else if (holdTime != 0)
+            {
+                holdTime = 0;
+            }
         }
     }
 
@@ -117,7 +139,33 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnStrike()
     {
-        Instantiate(strikeVFX, transform.position, transform.rotation);
+        if (charge < 2)
+        {
+            Instantiate(strikeVFX, transform.position, transform.rotation);
+        } else if (charge < 3)
+        {
+            // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * 15));
+            Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject l1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject r1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            l1.transform.Rotate(Vector3.up, 15);
+            r1.transform.Rotate(Vector3.up, -15);
+            // Instantiate(strikeVFX, transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 15, transform.rotation.eulerAngles.z));
+            // Instantiate(strikeVFX, transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 15, transform.rotation.eulerAngles.z));
+            // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * -15));
+        } else
+        {
+            Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject l1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject r1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            l1.transform.Rotate(Vector3.up, 15);
+            r1.transform.Rotate(Vector3.up, -15);
+            GameObject l2 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject r2 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            l2.transform.Rotate(Vector3.up, 30);
+            r2.transform.Rotate(Vector3.up, -30);
+        }
+        
     }
 
 }
