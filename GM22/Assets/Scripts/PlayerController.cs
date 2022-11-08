@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
+    [SerializeField] GameObject swordFX;
+    VisualEffect chargeFX;
 
     int charge = 0;
     int maxStage = 3;
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        chargeFX = swordFX.GetComponentInChildren<VisualEffect>();
     }
 
     private void OnEnable()
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetBool("Charge", true);
                 charge = (int) ((holdTime - holdTimeForCharge) / timePerChargePhase);
+                chargeFX.SetInt("chargeLevel", charge);
             }
             // Debug.Log(holdTime);
         } else
@@ -105,6 +110,7 @@ public class PlayerController : MonoBehaviour
                 holdTime = 0;
             }
         }
+        chargeFX.SetInt("chargeLevel", charge);
     }
 
     public void ActivateSlash(int index)
@@ -165,7 +171,7 @@ public class PlayerController : MonoBehaviour
             l2.transform.Rotate(Vector3.up, 30);
             r2.transform.Rotate(Vector3.up, -30);
         }
-        
+        charge = 0;
     }
 
 }
