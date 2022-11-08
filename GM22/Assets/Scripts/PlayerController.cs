@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
 {
     private GM22 inputs;
     private InputAction attackInputAction;
-    private InputAction lookInputAction;
     private InputAction moveInputAction;
+    private InputAction chargeAttackInputAction;
+    private InputAction chargeAttackReleaseInputAction;
     
     Rigidbody rb;
     Animator anim;
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
     {
         inputs = new GM22();
         attackInputAction = inputs.Player.Attack;
-        lookInputAction = inputs.Player.Look;
+        chargeAttackInputAction = inputs.Player.ChargeAttack;
+        chargeAttackInputAction = inputs.Player.ChargeAttackRelease;
         moveInputAction = inputs.Player.Move;
         inputs.Enable();
     }
@@ -80,7 +82,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             SpawnStrike();
         }
-            
+
+        if (chargeAttackInputAction.triggered)
+        {
+            print("lol");
+        }
     }
 
     public void ActivateSlash(int index)
