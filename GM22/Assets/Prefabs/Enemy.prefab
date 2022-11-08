@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shatteredEnemy: {fileID: 5194751002940254389, guid: 55b00e4c2d2154966afb9d83a54d2a29, type: 3}
-  core: {fileID: 0}
+  core: {fileID: 8679961166559624952, guid: ddd9ba35e5bd54fc8ab9fb236470b8c2, type: 3}
 --- !u!136 &5355316228196950446
 CapsuleCollider:
   m_ObjectHideFlags: 0
