@@ -18,7 +18,7 @@ public class UIObj : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && isTouching)
         {
-            if (objID == 3)
+            if (objID > 1)
             {
                 UIManagerScript.disable(10);
             }

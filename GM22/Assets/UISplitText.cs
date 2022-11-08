@@ -7,14 +7,16 @@ public class UISplitText : MonoBehaviour
     [SerializeField] Transform trfm;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Color colChange;
-    void Start()
+    [SerializeField] float spd;
+    void OnDisable()
     {
-        
+        rend.color += colChange*99;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rend.color -= colChange;
+        trfm.position += trfm.right * spd;
     }
 }

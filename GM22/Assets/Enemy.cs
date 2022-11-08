@@ -13,6 +13,6 @@ public class Enemy : MobileEntity
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
