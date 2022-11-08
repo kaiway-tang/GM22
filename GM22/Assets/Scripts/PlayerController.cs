@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     private GM22 inputs;
     private InputAction attackInputAction;
-    private InputAction lookInputAction;
     private InputAction moveInputAction;
     
     Rigidbody rb;
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
     {
         inputs = new GM22();
         attackInputAction = inputs.Player.Attack;
-        lookInputAction = inputs.Player.Look;
         moveInputAction = inputs.Player.Move;
         inputs.Enable();
     }
@@ -80,7 +78,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             SpawnStrike();
         }
+
+        if (attackInputAction.IsPressed())
+        {
             
+        }
     }
 
     public void ActivateSlash(int index)
