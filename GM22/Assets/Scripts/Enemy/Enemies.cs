@@ -41,8 +41,8 @@ public class Enemies : MonoBehaviour
         
         //figure out what enemy should do depending on where player is
         if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        if(playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        else if(playerInSightRange && !playerInAttackRange) ChasePlayer();
+        else if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
     }
     private void Patrolling()
@@ -51,7 +51,7 @@ public class Enemies : MonoBehaviour
             SearchWalkPoint();
         else
             agent.SetDestination(walkPoint);
-        Vector3 distancetoWalkPoint = transform.position = walkPoint;
+        Vector3 distancetoWalkPoint = transform.position - walkPoint;
 
         if (distancetoWalkPoint.magnitude < 1f) //walkpoint reached
             walkPointSet = false;
@@ -66,10 +66,14 @@ public class Enemies : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
+            Debug.Log("setting walkpt");
             walkPointSet = true;
+        }
     }
     private void ChasePlayer()
     {
+        transform.LookAt(player);
         agent.SetDestination((player.position));
     }
 
@@ -81,9 +85,8 @@ public class Enemies : MonoBehaviour
         if (!alreadyAttacked)
         {
             //attack code//
-            
-            
-            //
+            Debug.Log("attacking player");
+           //
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks); 
             //invoke is used to implement the delay between attacks
@@ -100,6 +103,12 @@ public class Enemies : MonoBehaviour
     {
         
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
     
 }
