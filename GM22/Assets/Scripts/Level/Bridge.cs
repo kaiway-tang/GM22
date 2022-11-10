@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Bridge : MonoBehaviour
 {
     private Mesh mesh;
+    private MeshCollider collider;
     
     [SerializeField] private GameObject startPoint;
     [SerializeField] private GameObject endPoint;
-    [SerializeField] private Vector3 direction;
     [SerializeField] private float width = 1f;
 
     private float curveMagnitude;
@@ -22,6 +23,7 @@ public class Bridge : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        collider = GetComponent<MeshCollider>();
     }
 
     private void Update()
@@ -30,14 +32,20 @@ public class Bridge : MonoBehaviour
         vertices.Clear();
         triangles.Clear();
 
-        curveMagnitude = Vector3.Distance(startPoint.transform.position, endPoint.transform.position) / 2;
+        var startPosition = startPoint.transform.position;
+        var endPosition = endPoint.transform.position;
+        var startForward = startPoint.transform.forward;
+        var endForward = endPoint.transform.forward;
+        
+        curveMagnitude = Vector3.Distance(startPosition, endPosition) / 2;
 
-        Bezier curve = new Bezier(startPoint.transform.position, startPoint.transform.position + direction * curveMagnitude,
-            endPoint.transform.position - direction * curveMagnitude, endPoint.transform.position, 20);
+        Bezier curve = new Bezier(startPosition, startPosition + startForward * curveMagnitude,
+            endPosition + endPoint.transform.forward * curveMagnitude, endPosition, 20);
 
-        Vector3 perpendicular = new Vector3(-direction.z, 0, direction.x).normalized * width;
-        vertices.Add(startPoint.transform.position + perpendicular);
-        vertices.Add(startPoint.transform.position - perpendicular);
+        Vector3 startPerpendicular = new Vector3(-startForward.z, 0, startForward.x).normalized * width;
+        vertices.Add(startPosition + startPerpendicular);
+        vertices.Add(startPosition - startPerpendicular);
+        
         for (int i = 0; i < curve.points.Length - 1; i++)
         {
             Vector3 midpoint = (curve.points[i] + curve.points[i + 1]) / 2;
@@ -47,8 +55,10 @@ public class Bridge : MonoBehaviour
             vertices.Add(midpoint + perp);
             vertices.Add(midpoint - perp);
         }
-        vertices.Add(endPoint.transform.position + perpendicular);
-        vertices.Add(endPoint.transform.position - perpendicular);
+        
+        Vector3 endPerpendicular = new Vector3(-endForward.z, 0, endForward.x).normalized * width;
+        vertices.Add(endPosition - endPerpendicular);
+        vertices.Add(endPosition + endPerpendicular);
 
         for (int i = 0; i < vertices.Count - 2; i+=2)
         {
@@ -64,6 +74,8 @@ public class Bridge : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         
         mesh.RecalculateNormals();
+
+        collider.sharedMesh = mesh;
     }
 }
 

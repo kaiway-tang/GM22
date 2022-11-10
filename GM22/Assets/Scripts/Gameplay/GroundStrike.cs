@@ -29,7 +29,7 @@ public class GroundStrike : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
+        if (Physics.Raycast(transform.position + Vector3.up * .7f, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
         {
             transform.parent.position = new Vector3(transform.parent.position.x, hit.point.y, transform.parent.position.z);
         } else
