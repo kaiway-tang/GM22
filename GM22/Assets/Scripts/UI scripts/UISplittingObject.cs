@@ -5,12 +5,13 @@ using UnityEngine;
 public class UISplittingObject : UIObj
 {
     [SerializeField] GameObject[] objs; //0: slash
-    [SerializeField] Transform trfm;
     [SerializeField] Vector2 offset;
     [SerializeField] SpriteRenderer rend;
 
-    private void OnDisable()
+    private new void OnEnable()
     {
+        base.OnEnable();
+
         for (int i = 1; i < 3; i++)
         {
             objs[i].SetActive(false);
@@ -31,31 +32,10 @@ public class UISplittingObject : UIObj
         }
     }
 
-    private new void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     void doSlash()
     {
         Transform slashFX = Instantiate(objs[0], trfm.position + trfm.right * offset.x + trfm.up * offset.y, trfm.rotation).transform;
         slashFX.parent = UIParent;
         slashFX.Rotate(Vector3.forward * 15);
-    }
-
-    private new void OnTriggerEnter(Collider col)
-    {
-        if (col.GetComponent<UIObj>().objID == cursor)
-        {
-            base.OnTriggerEnter(col);
-        }
-    }
-
-    private new void OnTriggerExit(Collider col)
-    {
-        if (col.GetComponent<UIObj>().objID == cursor)
-        {
-            base.OnTriggerExit(col);
-        }
     }
 }

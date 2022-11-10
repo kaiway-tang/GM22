@@ -10,13 +10,22 @@ public class UISplitText : MonoBehaviour
     [SerializeField] float spd;
     void OnDisable()
     {
-        rend.color += colChange*99;
+        rend.color = Color.white;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void OnEnable()
     {
-        rend.color -= colChange;
-        trfm.position += trfm.right * spd;
+        StartCoroutine(unscaledFU());
+    }
+
+    IEnumerator unscaledFU()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(.02f);
+
+            rend.color -= colChange;
+            trfm.position += trfm.right * spd;
+        }
     }
 }

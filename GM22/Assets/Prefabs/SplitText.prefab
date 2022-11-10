@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trfm: {fileID: 5677159217309122665}
   rend: {fileID: 5677159217309122666}
-  colChange: {r: 0, g: 0, b: 0, a: 0.09803922}
-  spd: 0.07
+  colChange: {r: 0, g: 0, b: 0, a: 0.11764706}
+  spd: 0.007

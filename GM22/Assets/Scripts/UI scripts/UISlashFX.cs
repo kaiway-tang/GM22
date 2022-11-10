@@ -11,26 +11,30 @@ public class UISlashFX : MonoBehaviour
 
     int tmr;
     
-    void Start()
+    void OnEnable()
     {
-        
+        StartCoroutine(unscaledFU());
     }
-
-    void FixedUpdate()
+    IEnumerator unscaledFU()
     {
-        tmr++;
-        trfm.position += trfm.right * spd;
-        if (tmr < 7)
+        while (true)
         {
-            trfm.localScale += scale;
-        }
-        else if (tmr < 13)
-        {
-            trfm.localScale -= scale;
-        }
-        else
-        {
-            Destroy(gameObject);
+            yield return new WaitForSecondsRealtime(.02f);
+
+            tmr++;
+            trfm.position += trfm.right * spd;
+            if (tmr < 7)
+            {
+                trfm.localScale += scale;
+            }
+            else if (tmr < 13)
+            {
+                trfm.localScale -= scale;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

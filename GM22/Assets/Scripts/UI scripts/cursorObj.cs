@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class cursorObj : UIObj
 {
-    [SerializeField] Transform trfm;
+    public static Transform trfm;
     [SerializeField] Camera mainCam;
     Vector3 mousePos;
     void Start()
     {
-        
+        trfm = transform;
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
+        base.Update();
+
         mousePos.x = Input.mousePosition.x;
         mousePos.y = Input.mousePosition.y;
-        mousePos.z = mainCam.nearClipPlane + .01f;
+        mousePos.z = mainCam.nearClipPlane + .1f;
         trfm.position = mainCam.ScreenToWorldPoint(mousePos);
     }
 }

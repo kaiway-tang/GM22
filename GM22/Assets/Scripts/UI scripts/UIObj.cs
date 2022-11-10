@@ -8,69 +8,76 @@ public class UIObj : MonoBehaviour
     protected const int cursor = 1 , quit = 2, resume = 3;
     [SerializeField] UIManager UIManagerScript;
     [SerializeField] protected Transform UIParent, bracket;
-    [SerializeField] protected bool isTouching, adjust;
-    void Start()
+    [SerializeField] protected bool isTouching, touchingUpdated, adjust, doDisable;
+    [SerializeField] Vector2 dimensions; //halved dimensions
+    [SerializeField] protected Transform trfm;
+    protected void OnEnable()
     {
-        
+        touchingUpdated = isTouching;
+        adjust = true;
+        doDisable = false;
+
+        StartCoroutine(unscaledFU());
     }
 
     protected void Update()
     {
         if (Input.GetMouseButtonDown(0) && isTouching)
         {
+            adjust = true;
+            doDisable = true;
+
+            if (objID == resume)
+            {
+                GameManager.Resume();
+                UIManagerScript.disable(10);
+            } else if (objID == quit)
+            {
+                Application.Quit();
+            }
+        }
+    }
+
+    IEnumerator unscaledFU()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(.02f);
+
             if (objID > 1)
             {
-                UIManagerScript.disable(10);
-            }
-        }
-    }
-
-    protected void FixedUpdate()
-    {
-        if (objID > 1)
-        {
-            if (isTouching)
-            {
-                if (adjust && bracket.localScale.y < .6f)
+                if (isTouching)
                 {
-                    bracket.localScale += new Vector3(0, 0.09f, 0);
+                    if (adjust && bracket.localScale.y < .6f)
+                    {
+                        bracket.localScale += new Vector3(0, 0.09f, 0);
+                    }
+                    else
+                    {
+                        bracket.localScale = new Vector3(0.5f, .6f, 0);
+                        adjust = false;
+                    }
                 }
                 else
                 {
-                    bracket.localScale = new Vector3(0.5f, .6f, 0);
-                    adjust = false;
+                    if (adjust && bracket.localScale.y > 0)
+                    {
+                        bracket.localScale -= new Vector3(0, 0.09f, 0);
+                    }
+                    else
+                    {
+                        bracket.localScale = new Vector3(0.5f, 0f, 0);
+                        adjust = false;
+                    }
                 }
             }
-            else
+
+            isTouching = Mathf.Abs(cursorObj.trfm.localPosition.x - trfm.localPosition.x) < dimensions.x && Mathf.Abs(cursorObj.trfm.localPosition.y - trfm.localPosition.y) < dimensions.y;
+            if (touchingUpdated != isTouching)
             {
-                if (adjust && bracket.localScale.y > 0)
-                {
-                    bracket.localScale -= new Vector3(0, 0.09f, 0);
-                }
-                else
-                {
-                    bracket.localScale = new Vector3(0.5f, 0f, 0);
-                    adjust = false;
-                }
+                touchingUpdated = isTouching;
+                adjust = true;
             }
-        }
-    }
-
-    protected void OnTriggerEnter(Collider col)
-    {
-        if (col.GetComponent<UIObj>().objID == cursor)
-        {
-            isTouching = true;
-            adjust = true;
-        }
-    }
-
-    protected void OnTriggerExit(Collider col)
-    {
-        if (col.GetComponent<UIObj>().objID == cursor)
-        {
-            isTouching = false;
-            adjust = true;
         }
     }
 }

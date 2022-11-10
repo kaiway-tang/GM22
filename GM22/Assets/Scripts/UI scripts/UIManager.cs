@@ -6,34 +6,45 @@ using UnityEditor.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject UIParent;
+    static UIManager UIManScr;
     int disableDelay;
-    void Start()
+
+    private void Start()
     {
-        
+        UIManScr = GetComponent<UIManager>();
+    }
+
+    void OnEnable()
+    {
+        StartCoroutine(unscaledFU());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
-        {
-            enable();
-        }
+        
     }
-    private void FixedUpdate()
+
+    IEnumerator unscaledFU()
     {
-        if (disableDelay > 0)
+        while (true)
         {
-            disableDelay--;
-            if (disableDelay == 0)
+            yield return new WaitForSecondsRealtime(.02f);
+
+            if (disableDelay > 0)
             {
-                UIParent.SetActive(false);
+                disableDelay--;
+                if (disableDelay == 0)
+                {
+                    UIParent.SetActive(false);
+                }
             }
         }
     }
-    public void enable()
+
+    public static void EnableUI()
     {
-        UIParent.SetActive(true);
+        UIManScr.UIParent.SetActive(true);
     }
 
     public void disable(int delay) //delay in ticks
