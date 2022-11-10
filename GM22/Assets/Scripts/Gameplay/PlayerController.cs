@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
+    [SerializeField] Material chargeGlow;
+    [SerializeField] List<Color> glowColors;
     [SerializeField] GameObject swordFX;
     VisualEffect chargeFX;
 
@@ -33,8 +35,8 @@ public class PlayerController : MonoBehaviour
 
 
     // Player stats
-    int damage = 1;
-    float attackSpeed = 1;
+    [SerializeField] float damageMult = 1; 
+    [SerializeField] float attackSpeed = 1;
     float maxHealth = 100;
     float curHealth = 100;
 
@@ -84,8 +86,8 @@ public class PlayerController : MonoBehaviour
         } else
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            rb.angularVelocity = Vector3.zero;
         }
+        rb.angularVelocity = Vector3.zero;
 
         // Control movement animation
         anim.SetBool("Moving", rb.velocity.magnitude > 0.05f);
@@ -113,7 +115,9 @@ public class PlayerController : MonoBehaviour
                 chargeFX.SetInt("chargeLevel", charge);
                 if (old != charge)
                 {
+                    Debug.Log("levelUp");
                     chargeFX.SendEvent("levelUp");
+                    StartCoroutine(Flash());
                 }
             }
             // Debug.Log(holdTime);
@@ -131,10 +135,25 @@ public class PlayerController : MonoBehaviour
         chargeFX.SetInt("chargeLevel", charge);
     }
 
+    IEnumerator Flash()
+    {
+        float str = 1f;  // tested magic numbers
+        Color color = glowColors[charge];
+        Debug.Log(chargeGlow.GetFloat("_Strength"));
+        chargeGlow.SetFloat("_Strength", str);
+        chargeGlow.SetColor("_Color", color);
+        while (str < 3.3f)
+        {
+            str = Mathf.Lerp(str, 3.8f, 0.02f);
+            chargeGlow.SetFloat("_Strength", str);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     public void ActivateSlash(int index)
     {
         slashVFX[index].SetActive(true);
-        slashVFX[index].GetComponent<PlayerHitbox>().damage = damage;
+        slashVFX[index].GetComponent<PlayerHitbox>().damage = (int)Mathf.Round(1 * damageMult);
     }
 
     public void DeactivateSlash(int index)
@@ -191,6 +210,7 @@ public class PlayerController : MonoBehaviour
             r2.transform.Rotate(Vector3.up, -30);
         }
         charge = 0;
+        chargeGlow.SetColor("_Color", glowColors[0]);
     }
 
 }
