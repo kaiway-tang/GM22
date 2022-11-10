@@ -51,9 +51,9 @@ public class Enemies : MonoBehaviour
             SearchWalkPoint();
         else
             agent.SetDestination(walkPoint);
-        Vector3 distancetoWalkPoint = transform.position - walkPoint;
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if (distancetoWalkPoint.magnitude < 1f) //walkpoint reached
+        if (distanceToWalkPoint.magnitude < 1f) //walkpoint reached
             walkPointSet = false;
 
     }
@@ -103,12 +103,14 @@ public class Enemies : MonoBehaviour
     {
         
     }
-    private void OnDrawGizmosSelected()
+   
+    /*private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+    */
     
 }
