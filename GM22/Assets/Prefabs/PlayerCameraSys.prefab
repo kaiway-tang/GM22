@@ -10080,6 +10080,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 1365097988820540919, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: field of view
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1365097988855070123, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10156,6 +10160,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 4466239960789015255}
+    - target: {fileID: 1365097989200933967, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8927218192308187921, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_RequiresDepthTextureOption
       value: 1

@@ -32,11 +32,15 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Hold time needed to initiate charge attack.")] [SerializeField] float holdTimeForCharge = 0.5f;
     [Tooltip("Time required to charge up 1 state")] [SerializeField] float timePerChargePhase = 1f;
     bool swinging = false;
+    int combo = 0;
+    [SerializeField] float maxTimeBetweenCombo = 0.6f;
+    float comboTimer = 0;
 
 
     // Player stats
     [SerializeField] float damageMult = 1; 
     [SerializeField] float attackSpeed = 1;
+    [SerializeField] float moveSpeed = 1;
     float maxHealth = 100;
     float curHealth = 100;
 
@@ -75,12 +79,14 @@ public class PlayerController : MonoBehaviour
             
             bool notMoving = direction.magnitude == 0;
 
+            float totSpeed = speed * moveSpeed;  // Base speed (speed) times speed multiplier (moveSpeed)
+
             // Always face direction of movement
             if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
             if (!notMoving)
-                rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
+                rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * totSpeed);
             else
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         } else
@@ -89,12 +95,35 @@ public class PlayerController : MonoBehaviour
         }
         rb.angularVelocity = Vector3.zero;
 
-        // Control movement animation
+        // Control animations
         anim.SetBool("Moving", rb.velocity.magnitude > 0.05f);
+        anim.SetFloat("atkSpeed", attackSpeed);
+        anim.SetFloat("moveSpeed", moveSpeed);
+
+        // Control combo state
+        AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
+        // Only count down when player is not swinging
+        if (comboTimer > 0 && (curState.IsName("Idle") || curState.IsName("Run")))
+        {
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0)
+            {
+                combo = 0;
+                comboTimer = 0;
+                anim.SetBool("Combo", false);
+            }
+        }
 
         if (attackInputAction.triggered)
         {
             anim.SetBool("Combo", true);
+            if (comboTimer > 0)
+            {
+                combo++;
+                if (combo > 2) combo = 0;
+                comboTimer = 0;
+            }
+            anim.SetInteger("ComboCount", combo);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             // SpawnStrike();  // Purely testing
         }
@@ -132,7 +161,27 @@ public class PlayerController : MonoBehaviour
                 holdTime = 0;
             }
         }
+
+        HandleAnims();
+
         chargeFX.SetInt("chargeLevel", charge);
+    }
+
+    void HandleAnims()
+    {
+        // Check the current animation to see if we apply speed changes
+        AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
+        if (curState.IsName("Idle") || curState.IsName("Charge") || curState.IsName("Charge Swing"))
+        {
+            // Don't modify speed at all
+        }
+        else if (curState.IsName("Run"))  
+        {
+            // Modify anim speed based on player speed
+        } else
+        {
+            // Modify anim based on attack speed 
+        }
     }
 
     IEnumerator Flash()
@@ -142,7 +191,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(chargeGlow.GetFloat("_Strength"));
         chargeGlow.SetFloat("_Strength", str);
         chargeGlow.SetColor("_Color", color);
-        while (str < 3.3f)
+        while (str < 2.6f)
         {
             str = Mathf.Lerp(str, 3.8f, 0.02f);
             chargeGlow.SetFloat("_Strength", str);
@@ -163,6 +212,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetCombo()
     {
+        comboTimer = maxTimeBetweenCombo;
         anim.SetBool("Combo", false);
     }
 
@@ -176,10 +226,10 @@ public class PlayerController : MonoBehaviour
         swinging = false;
     }
 
-    public void Readjust()
-    {
-        transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
-    }
+    //public void Readjust()
+    //{
+    //    transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
+    //}
 
     public void SpawnStrike()
     {
