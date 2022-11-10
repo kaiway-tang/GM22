@@ -72,7 +72,7 @@ public class UIObj : MonoBehaviour
                 }
             }
 
-            isTouching = Mathf.Abs(cursorObj.trfm.localPosition.x - trfm.localPosition.x) < dimensions.x && Mathf.Abs(cursorObj.trfm.localPosition.y - trfm.localPosition.y) < dimensions.y;
+            isTouching = (Mathf.Abs(cursorObj.trfm.localPosition.x - trfm.localPosition.x) < dimensions.x && Mathf.Abs(cursorObj.trfm.localPosition.y - trfm.localPosition.y) < dimensions.y) && !doDisable;
             if (touchingUpdated != isTouching)
             {
                 touchingUpdated = isTouching;
