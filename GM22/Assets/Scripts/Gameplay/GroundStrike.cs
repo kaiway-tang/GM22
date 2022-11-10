@@ -31,10 +31,10 @@ public class GroundStrike : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
         {
-            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            transform.parent.position = new Vector3(transform.parent.position.x, hit.point.y, transform.parent.position.z);
         } else
         {
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.parent.position = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
         }
     }
 

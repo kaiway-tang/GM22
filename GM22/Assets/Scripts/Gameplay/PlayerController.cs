@@ -31,12 +31,21 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Time required to charge up 1 state")] [SerializeField] float timePerChargePhase = 1f;
     bool swinging = false;
 
+
+    // Player stats
+    int damage = 1;
+    float attackSpeed = 1;
+    float maxHealth = 100;
+    float curHealth = 100;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         chargeFX = swordFX.GetComponentInChildren<VisualEffect>();
+        Cursor.lockState = CursorLockMode.Locked;  // Finally remembered to do this
     }
 
     private void OnEnable()
@@ -94,9 +103,18 @@ public class PlayerController : MonoBehaviour
             holdTime += Time.deltaTime;
             if (holdTime > holdTimeForCharge)
             {
+                int old = charge;
                 anim.SetBool("Charge", true);
                 charge = (int) ((holdTime - holdTimeForCharge) / timePerChargePhase);
+                if (charge > maxStage)
+                {
+                    charge = maxStage;
+                }
                 chargeFX.SetInt("chargeLevel", charge);
+                if (old != charge)
+                {
+                    chargeFX.SendEvent("levelUp");
+                }
             }
             // Debug.Log(holdTime);
         } else
@@ -116,6 +134,7 @@ public class PlayerController : MonoBehaviour
     public void ActivateSlash(int index)
     {
         slashVFX[index].SetActive(true);
+        slashVFX[index].GetComponent<PlayerHitbox>().damage = damage;
     }
 
     public void DeactivateSlash(int index)
