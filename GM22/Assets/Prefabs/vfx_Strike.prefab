@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1110719764113826909}
   m_Layer: 6
   m_Name: strike
-  m_TagString: Untagged
+  m_TagString: VFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 7513759334069659928}
   m_Layer: 6
   m_Name: vfx_Strike
-  m_TagString: Untagged
+  m_TagString: VFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
