@@ -3584,8 +3584,12 @@ MonoBehaviour:
   swordFX: {fileID: 9016343428389850758}
   holdTimeForCharge: 0.5
   timePerChargePhase: 1
+  maxTimeBetweenCombo: 0.6
   damageMult: 1
   attackSpeed: 1
+  moveSpeed: 1
+  maxHealth: 100
+  curHealth: 100
 --- !u!1 &2900288350341237938
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,8 +4902,12 @@ MonoBehaviour:
   swordFX: {fileID: 0}
   holdTimeForCharge: 0.5
   timePerChargePhase: 1
+  maxTimeBetweenCombo: 0.6
   damageMult: 1
   attackSpeed: 1
+  moveSpeed: 1
+  maxHealth: 100
+  curHealth: 100
 --- !u!1 &4203942676699268637
 GameObject:
   m_ObjectHideFlags: 0
@@ -10163,6 +10171,10 @@ PrefabInstance:
     - target: {fileID: 1365097989200933967, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_Lens.FieldOfView
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927218192308187921, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8927218192308187921, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_RequiresDepthTextureOption
