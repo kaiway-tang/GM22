@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         // Control animations
-        anim.SetBool("Moving", rb.velocity.magnitude > 0.05f);
+        anim.SetBool("Moving", rb.velocity.magnitude - rb.velocity.y > 0.05f);
         anim.SetFloat("atkSpeed", attackSpeed);
         anim.SetFloat("moveSpeed", moveSpeed);
 
