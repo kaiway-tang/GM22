@@ -10176,6 +10176,14 @@ PrefabInstance:
       propertyPath: m_Lens.FieldOfView
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1537154600489114163, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_IgnoreTag
+      value: VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537154600489114163, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
     - target: {fileID: 8927218192308187921, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
