@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
     public void Readjust()
     {
-        if (gamem)
+        if (GameManager.gamePaused) { return; }
         transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
     }
 
