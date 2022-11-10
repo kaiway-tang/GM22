@@ -179,9 +179,12 @@ MonoBehaviour:
   cam: {fileID: 294484584}
   slashVFX: []
   strikeVFX: {fileID: 8968412139518979475, guid: e15369e4928a12d40993c06e41023aef, type: 3}
+  chargeGlow: {fileID: 0}
   swordFX: {fileID: 0}
   holdTimeForCharge: 0.7
   timePerChargePhase: 1
+  damageMult: 1
+  attackSpeed: 1
 --- !u!54 &465616503
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1814,12 +1817,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7973861393577264976, guid: a7fd9c7db15d5cd429f71674567b330c, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7973861393577264976, guid: a7fd9c7db15d5cd429f71674567b330c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 5f3c8951fa019ac47a8371a741890052, type: 2}
+      objectReference: {fileID: 2100000, guid: 51d3377f399ad0842a2752459f6ec43c, type: 2}
     - target: {fileID: 8045021402091186580, guid: a7fd9c7db15d5cd429f71674567b330c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 8.785736
