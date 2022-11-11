@@ -8,6 +8,7 @@ public class HPBar : MonoBehaviour
     [SerializeField] Transform HPBarTrfm, HPScalerTrfm;
     [SerializeField] SpriteRenderer[] rend;
     [SerializeField] Color alphaChange;
+    [SerializeField] bool playerHPBar;
     Vector3 scale = Vector3.one;
     int lastHP;
     bool active;
@@ -16,7 +17,14 @@ public class HPBar : MonoBehaviour
     {
         lastHP = HPEntityScr.HP;
     }
-    // Update is called once per frame
+    private void Update()
+    {
+        if (playerHPBar)
+        {
+            GameManager.FaceCamera(HPBarTrfm);
+        }
+    }
+
     void FixedUpdate()
     {
         GameManager.FaceCamera(HPBarTrfm);
