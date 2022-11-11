@@ -17,17 +17,10 @@ public class HPBar : MonoBehaviour
     {
         lastHP = HPEntityScr.HP;
     }
-    private void Update()
-    {
-        if (playerHPBar)
-        {
-            GameManager.FaceCamera(HPBarTrfm);
-        }
-    }
 
     void FixedUpdate()
     {
-        GameManager.FaceCamera(HPBarTrfm);
+        if (!playerHPBar) { GameManager.FaceCamera(HPBarTrfm); }
 
         if (lastHP != HPEntityScr.HP)
         {
