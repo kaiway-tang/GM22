@@ -13,6 +13,8 @@ public class MobileEntity : HPEntity
     protected new void Start()
     {
         base.Start();
+        trfm = transform;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
