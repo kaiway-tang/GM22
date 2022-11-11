@@ -13,6 +13,7 @@ public class PlayerController : MobileEntity
     private InputAction moveInputAction;
 
     private InputAction sprintInputAction;
+    private InputAction camlockInputAction;
     
     Animator anim;
     [SerializeField] float speed = 5f;
@@ -20,6 +21,7 @@ public class PlayerController : MobileEntity
     [Tooltip("The mesh object that is moving in the animations. We use this to set the position of the transform.")]
     [SerializeField] GameObject animObject;
     [SerializeField] GameObject cam;
+    [SerializeField] YCamera targetCam;
     [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
     [SerializeField] GameObject beamVFX;
@@ -27,6 +29,7 @@ public class PlayerController : MobileEntity
     [SerializeField] List<Color> glowColors;
     [SerializeField] GameObject swordFX;
     VisualEffect chargeFX;
+    Transform closestEnemy;
 
     int charge = 0;
     int maxStage = 3;
@@ -36,6 +39,7 @@ public class PlayerController : MobileEntity
     bool swinging = false;
     int combo = 0;
     bool sprinting = false;
+    bool zLocked = false;
     [SerializeField] float maxTimeBetweenCombo = 0.6f;
     [SerializeField] float sprintModifier = 2f;
     float comboTimer = 0;
@@ -63,6 +67,7 @@ public class PlayerController : MobileEntity
         attackInputAction = inputs.Player.Attack;
         moveInputAction = inputs.Player.Move;
         sprintInputAction = inputs.Player.Sprint;
+        camlockInputAction = inputs.Player.CamLock;
         inputs.Enable();
     }
 
@@ -74,6 +79,18 @@ public class PlayerController : MobileEntity
     // Update is called once per frame
     void Update()
     {
+        CheckForEnemies();  // For camera locking
+        if (camlockInputAction.triggered)
+            zLocked = !zLocked;
+
+        if (closestEnemy == null)
+            zLocked = false;
+
+        if (zLocked)
+            targetCam.ZTarget(closestEnemy.gameObject);
+        else
+            targetCam.Normal();
+
         if (!swinging)
         {
             // Using isometric to test, will change later
@@ -121,6 +138,11 @@ public class PlayerController : MobileEntity
                 comboTimer = 0;
                 anim.SetBool("Combo", false);
             }
+        }
+
+        if (inputs.Player.Execute.triggered)
+        {
+            anim.Play("Execute");
         }
 
         if (attackInputAction.triggered)
@@ -173,25 +195,26 @@ public class PlayerController : MobileEntity
             }
         }
 
-        HandleAnims();
-
         chargeFX.SetInt("chargeLevel", charge);
     }
 
-    void HandleAnims()
+    void CheckForEnemies()
     {
-        // Check the current animation to see if we apply speed changes
-        AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
-        if (curState.IsName("Idle") || curState.IsName("Charge") || curState.IsName("Charge Swing"))
+        Collider[] hit = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("EnemyHB"));
+        Collider closest = null;
+        float dist = Mathf.Infinity;
+        foreach(Collider col in hit)
         {
-            // Don't modify speed at all
+            float mag = (col.gameObject.transform.position - transform.position).magnitude;
+            if (mag < dist)
+            {
+                closest = col;
+                dist = mag;
+            }
         }
-        else if (curState.IsName("Run"))  
+        if (closest != null)
         {
-            // Modify anim speed based on player speed
-        } else
-        {
-            // Modify anim based on attack speed 
+            closestEnemy = closest.gameObject.transform;
         }
     }
 
@@ -245,9 +268,16 @@ public class PlayerController : MobileEntity
 
     public void SpawnBeam()
     {
-        beamVFX.SetActive(false);
-        beamVFX.SetActive(true);
+        if (closestEnemy != null)
+            StartCoroutine(DespawnBeam(Instantiate(beamVFX, closestEnemy.position, Quaternion.identity)));
     }
+
+    IEnumerator DespawnBeam(GameObject beam)
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(beam);
+    }
+
     public void SpawnStrike()
     {
         Vector3 pos = transform.position + Vector3.up * 0f;

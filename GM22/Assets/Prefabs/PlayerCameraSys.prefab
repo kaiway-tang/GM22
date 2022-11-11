@@ -2606,11 +2606,13 @@ MonoBehaviour:
   speed: 5
   animObject: {fileID: 0}
   cam: {fileID: 2826026923489404541}
+  targetCam: {fileID: 197620344004670680}
   slashVFX:
   - {fileID: 909778534374976354}
   - {fileID: 6051777858151539229}
   - {fileID: 1192746852563561206}
   strikeVFX: {fileID: 8968412139518979475, guid: e15369e4928a12d40993c06e41023aef, type: 3}
+  beamVFX: {fileID: 7472590375598179009, guid: 33005b17e8a596648b917ebb405d1383, type: 3}
   chargeGlow: {fileID: 2100000, guid: 51d3377f399ad0842a2752459f6ec43c, type: 2}
   glowColors:
   - {r: 0, g: 0.92584705, b: 1, a: 0.99607843}
@@ -7803,7 +7805,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7909,6 +7911,10 @@ PrefabInstance:
       propertyPath: m_CollideAgainst.m_Bits
       value: 16384
       objectReference: {fileID: 0}
+    - target: {fileID: 3380562733191062845, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 4466239960789015255}
     - target: {fileID: 3579908564944310588, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: _camTrfm
       value: 
@@ -7927,6 +7933,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+--- !u!114 &197620344004670680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3996886700448075604, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+  m_PrefabInstance: {fileID: 3875872912623352716}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c108dc395083a1e42a1b5a0482a1f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2826026923454842407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1365097988855070123, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}

@@ -41649,15 +41649,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
-    functionName: SpawnStrike
+  - time: 1.4333333
+    functionName: ResetSwing
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4333333
-    functionName: ResetSwing
+  - time: 1.5
+    functionName: SpawnBeam
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
