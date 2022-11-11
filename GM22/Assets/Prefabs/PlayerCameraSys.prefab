@@ -653,10 +653,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6980754528914510783}
-  - component: {fileID: 7034651464577454547}
   - component: {fileID: 3963556360984917432}
-  m_Layer: 6
-  m_Name: hitbox
+  - component: {fileID: 8666708632221799453}
+  m_Layer: 0
+  m_Name: physicalHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,20 +677,6 @@ Transform:
   m_Father: {fileID: 4466239960789015255}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7034651464577454547
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546075454396922107}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.15
-  m_Height: 1.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &3963556360984917432
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -707,6 +693,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &8666708632221799453
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546075454396922107}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.6419246
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7961463, z: 0}
 --- !u!1 &594434537147653954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,10 +2519,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4466239960789015255}
   - component: {fileID: 752635882797818247}
-  - component: {fileID: 1156178924605196711}
   - component: {fileID: 6917653884047779876}
   - component: {fileID: 2769354019803393519}
-  m_Layer: 0
+  - component: {fileID: 7251567216126993411}
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2569,20 +2569,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &1156178924605196711
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2838551747613200541}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.6419246
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.7961463, z: 0}
 --- !u!54 &6917653884047779876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2614,8 +2600,10 @@ MonoBehaviour:
   HP: 100
   maxHP: 100
   entityID: 0
+  hitFX: {fileID: 0}
   trfm: {fileID: 4466239960789015255}
   rb: {fileID: 6917653884047779876}
+  trfm: {fileID: 4466239960789015255}
   speed: 5
   animObject: {fileID: 0}
   cam: {fileID: 2826026923489404541}
@@ -2638,6 +2626,20 @@ MonoBehaviour:
   damageMult: 1
   attackSpeed: 1
   moveSpeed: 1
+--- !u!136 &7251567216126993411
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838551747613200541}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &2940839368815237443
 GameObject:
   m_ObjectHideFlags: 0

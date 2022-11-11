@@ -34,4 +34,15 @@ public class GameManager : MonoBehaviour
         gamePaused = false;
         Time.timeScale = 1;
     }
+
+    static Vector3 playerTargetOffset = new Vector3(0, 3, 0);
+    public static void FacePlayer(Transform origin, bool usePitch = false)
+    {
+        Vector3 direction = (playerControllerScr.trfm.position + playerTargetOffset - origin.position).normalized; //direction vector from enemy to player
+        Quaternion lookRotation;
+        if (usePitch) { lookRotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z)); } //target angle
+        else { lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); }
+        //for smooth rotation
+        origin.rotation = Quaternion.Slerp(origin.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 }
