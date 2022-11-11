@@ -327,15 +327,15 @@ public class PlayerController : MobileEntity
 
         float damage = damageMult;
         float slowReduction = (attackSpeed - 1) * 0.1f;
-
-        if (charge == 1)
+        if (charge == 0) { }
+        else if (charge == 1)
         {
             GameObject c = Instantiate(strikeVFX, pos, transform.rotation);
             GroundStrike strike = c.GetComponentInChildren<GroundStrike>();
             Attack atk = c.GetComponentInChildren<Attack>();
             strike.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
             atk.damage = Mathf.RoundToInt(30 * damageMult);
-        } else if (charge > 1 && charge < 3)
+        } else if (charge < 3)
         {
             // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * 15));
             GameObject c = Instantiate(strikeVFX, pos, transform.rotation);
