@@ -22,6 +22,7 @@ public class PlayerController : MobileEntity
     [SerializeField] GameObject cam;
     [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
+    [SerializeField] GameObject beamVFX;
     [SerializeField] Material chargeGlow;
     [SerializeField] List<Color> glowColors;
     [SerializeField] GameObject swordFX;
@@ -242,6 +243,11 @@ public class PlayerController : MobileEntity
         transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
     }
 
+    public void SpawnBeam()
+    {
+        beamVFX.SetActive(false);
+        beamVFX.SetActive(true);
+    }
     public void SpawnStrike()
     {
         Vector3 pos = transform.position + Vector3.up * 0f;
