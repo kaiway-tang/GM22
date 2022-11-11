@@ -54,6 +54,8 @@ public class PlayerController : MobileEntity
     [SerializeField] float healthBoost = 1;
     List<int> crystals;
 
+    [SerializeField] private skillPointManager skillPointManager;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -87,6 +89,8 @@ public class PlayerController : MobileEntity
     void Update()
     {
         CheckForEnemies();  // For camera locking
+        
+        CalculateBuffs();
 
         if (camlockInputAction.triggered)
         {
@@ -249,6 +253,8 @@ public class PlayerController : MobileEntity
                     break;
             }
         }
+        CalculateBuffs();
+        HP = maxHP;
     }
 
     void CalculateBuffs()
@@ -256,6 +262,19 @@ public class PlayerController : MobileEntity
         int red = crystals[0];
         int green = crystals[1];
         int blue = crystals[2];
+
+        // damageMult = (red - blue) * 0.2f + 1f;
+        // attackSpeed = (blue - green) * 0.2f + 1f;
+        // moveSpeed = (blue - green) * 0.2f + 1f;
+        // healthBoost = (green - red) * 0.2f + 1f;
+        damageMult = (red) * 0.2f + 1f;
+        attackSpeed = (blue) * 0.2f + 1f;
+        moveSpeed = (blue) * 0.2f + 1f;
+        healthBoost = (green) * 0.2f + 1f;
+        
+        skillPointManager.SetAttack(damageMult);
+        skillPointManager.SetSpeed(attackSpeed);
+        skillPointManager.SetHP(healthBoost);
     }
 
     void CheckForEnemies()
