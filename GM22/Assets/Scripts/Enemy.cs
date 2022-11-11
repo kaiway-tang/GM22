@@ -11,11 +11,11 @@ public class Enemy : MobileEntity
 
     private NavMeshAgent agent; // reference to agent to move enemy
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
-        target = PlayerManager.instance.player.transform;
+        target = GameManager.playerControllerScr.trfm;
         //convert game object to type transform
     }
 
@@ -23,7 +23,7 @@ public class Enemy : MobileEntity
     void Update()
     {
         
-        float distance = Vector3.Distance(target.position, transform.position);
+        float distance = Vector3.Distance(target.position, trfm.position);
         if (distance <= lookRadius)
         {
             //chase player

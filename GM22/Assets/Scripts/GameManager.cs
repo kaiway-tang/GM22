@@ -5,6 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool gamePaused;
+    [SerializeField] private PlayerController _playerControllerScr;
+    public static PlayerController playerControllerScr;
+
+    private void Awake()
+    {
+        playerControllerScr = _playerControllerScr;
+    }
 
     private void Update()
     {

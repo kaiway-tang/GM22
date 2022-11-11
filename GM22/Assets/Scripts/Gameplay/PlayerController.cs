@@ -6,13 +6,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MobileEntity
 {
     private GM22 inputs;
     private InputAction attackInputAction;
     private InputAction moveInputAction;
-    
-    Rigidbody rb;
+
     Animator anim;
     [SerializeField] float speed = 5f;
 
@@ -47,8 +46,9 @@ public class PlayerController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         chargeFX = swordFX.GetComponentInChildren<VisualEffect>();

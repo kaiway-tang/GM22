@@ -18,6 +18,7 @@ public class ShootingEnemy : Enemy
         if (cd > 0)
         {
             cd--;
+            FaceTarget();
         }
         else
         {

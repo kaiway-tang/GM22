@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MobileEntity : HPEntity
 {
-    [SerializeField] protected Transform trfm;
+    [SerializeField] public Transform trfm;
     [SerializeField] protected Rigidbody rb;
     Vector3 vect3;
 
