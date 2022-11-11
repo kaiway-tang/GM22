@@ -6,12 +6,13 @@ using UnityEditor.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject UIParent;
-    static UIManager UIManScr;
+    public GameObject rToRestart;
+    public static UIManager self;
     int disableDelay;
 
     private void Start()
     {
-        UIManScr = GetComponent<UIManager>();
+        self = GetComponent<UIManager>();
     }
 
     void OnEnable()
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     public static void EnableUI()
     {
-        UIManScr.UIParent.SetActive(true);
+        self.UIParent.SetActive(true);
     }
 
     public void disable(int delay) //delay in ticks

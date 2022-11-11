@@ -61,6 +61,12 @@ public class HPEntity : MonoBehaviour
         {
             died = true;
             GetComponent<EnemyShatter>().Shatter(dropCore);
+        } else if (entityID == player)
+        {
+            UIManager.self.rToRestart.SetActive(true);
+            GameManager.self.PlayerDied();
+            gameObject.SetActive(false);
+            return;
         }
         Destroy(gameObject);
     }

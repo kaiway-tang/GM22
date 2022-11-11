@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static PlayerController playerControllerScr;
     [SerializeField] private Transform _camTrfm;
     public static Transform camTrfm;
+    public static GameManager self;
+    bool playerIsDead;
 
     [SerializeField] private EnemySpawner[] spawners;
     EnemySpawner curSpawner;
@@ -16,12 +19,20 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        self = GetComponent<GameManager>();
         playerControllerScr = _playerControllerScr;
         camTrfm = _camTrfm;
     }
 
     private void Update()
     {
+        if (playerIsDead && Input.GetKeyDown(KeyCode.R))
+        {
+            playerIsDead = false;
+            gamePaused = false;
+            SceneManager.LoadScene("mainScene");
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
         {
             Pause();
@@ -31,6 +42,12 @@ public class GameManager : MonoBehaviour
         {
             SpawnWaves();
         }
+    }
+
+    public void PlayerDied()
+    {
+        playerIsDead = true;
+        transform.parent = null;
     }
 
     void SpawnWaves()
