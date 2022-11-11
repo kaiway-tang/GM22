@@ -1260,7 +1260,9 @@ MonoBehaviour:
   trfm: {fileID: 8353533396378242824}
   rb: {fileID: 8353533396378242829}
   spd: 3
-  cdRange: []
+  cdRange:
+  - 0.5
+  - 0.5
   lookRadius: 60
   trackingRange: 80
   attackingRange: 4

@@ -221,6 +221,7 @@ MonoBehaviour:
   - {fileID: 1021086213}
   - {fileID: 473311140}
   alphaChange: {r: 0, g: 0, b: 0, a: 0.011764706}
+  playerHPBar: 0
 --- !u!1 &2190747884536505728
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,11 +388,14 @@ MonoBehaviour:
   trfm: {fileID: 8353533396378242824}
   rb: {fileID: 8353533396378242829}
   spd: 1.7
-  cdRange: 4b0000007d000000
+  cdRange:
+  - 1.5
+  - 2.5
   lookRadius: 60
   trackingRange: 80
   attackingRange: 20
   projectile: {fileID: 8913336866556679652, guid: c53ca4b975cbe99468a2888f4b06e4d8, type: 3}
+  anim: {fileID: 0}
 --- !u!54 &8353533396378242829
 Rigidbody:
   m_ObjectHideFlags: 0
