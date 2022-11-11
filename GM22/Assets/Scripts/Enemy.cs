@@ -40,10 +40,12 @@ public class Enemy : MobileEntity
 
     }
 
-    protected void FaceTarget()
+    protected void FaceTarget(bool usePitch = false)
     {
         Vector3 direction = (target.position - transform.position).normalized; //direction vector from enemy to player
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0, direction.z)); //target angle
+        Quaternion lookRotation;
+        if (usePitch) { lookRotation = Quaternion.LookRotation(new Vector3(direction.x,direction.y, direction.z)); } //target angle
+        else { lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); }
         //for smooth rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }

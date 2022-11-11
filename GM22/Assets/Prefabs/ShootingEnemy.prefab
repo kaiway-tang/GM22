@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4100677235854901380}
-  - component: {fileID: 2126594660638556673}
-  m_Layer: 8
+  - component: {fileID: 9131720832196112794}
+  m_Layer: 0
   m_Name: hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,32 +32,19 @@ Transform:
   m_Father: {fileID: 8353533396378242824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2126594660638556673
-BoxCollider2D:
+--- !u!65 &9131720832196112794
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2190747884536505728}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8353533396378242830
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +59,7 @@ GameObject:
   - component: {fileID: 8353533396378242827}
   - component: {fileID: 8353533396378242828}
   - component: {fileID: 8353533396378242829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +140,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8353533396378242830}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -170,9 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f428d948ca1029943ab96545dfe332ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 40
-  maxHP: 0
+  HP: 30
+  maxHP: 30
   entityID: 0
+  hitFX: {fileID: 3072392546844146685, guid: d630c9697173b9945b6c3e9fd74433af, type: 3}
   trfm: {fileID: 8353533396378242824}
   rb: {fileID: 8353533396378242829}
   lookRadius: 3
