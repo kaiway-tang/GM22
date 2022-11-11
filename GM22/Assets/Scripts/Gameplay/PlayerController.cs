@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] List<GameObject> slashVFX;
     [SerializeField] GameObject strikeVFX;
+    [SerializeField] Material chargeGlow;
+    [SerializeField] List<Color> glowColors;
     [SerializeField] GameObject swordFX;
     VisualEffect chargeFX;
 
@@ -30,13 +32,18 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Hold time needed to initiate charge attack.")] [SerializeField] float holdTimeForCharge = 0.5f;
     [Tooltip("Time required to charge up 1 state")] [SerializeField] float timePerChargePhase = 1f;
     bool swinging = false;
+    int combo = 0;
+    [SerializeField] float maxTimeBetweenCombo = 0.6f;
+    float comboTimer = 0;
 
 
     // Player stats
-    int damage = 1;
-    float attackSpeed = 1;
-    float maxHealth = 100;
-    float curHealth = 100;
+    [SerializeField] float damageMult = 1; 
+    [SerializeField] float attackSpeed = 1;
+    [SerializeField] float moveSpeed = 1;
+
+    public float maxHealth = 100;  // Got lazy so j exposed these.
+    public float curHealth = 100;
 
 
     // Start is called before the first frame update
@@ -73,26 +80,51 @@ public class PlayerController : MonoBehaviour
             
             bool notMoving = direction.magnitude == 0;
 
+            float totSpeed = speed * moveSpeed;  // Base speed (speed) times speed multiplier (moveSpeed)
+
             // Always face direction of movement
             if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
             if (!notMoving)
-                rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
+                rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * totSpeed);
             else
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         } else
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            rb.angularVelocity = Vector3.zero;
         }
+        rb.angularVelocity = Vector3.zero;
 
-        // Control movement animation
-        anim.SetBool("Moving", rb.velocity.magnitude > 0.05f);
+        // Control animations
+        anim.SetBool("Moving", rb.velocity.magnitude - rb.velocity.y > 0.05f);
+        anim.SetFloat("atkSpeed", attackSpeed);
+        anim.SetFloat("moveSpeed", moveSpeed);
+
+        // Control combo state
+        AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
+        // Only count down when player is not swinging
+        if (comboTimer > 0 && (curState.IsName("Idle") || curState.IsName("Run")))
+        {
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0)
+            {
+                combo = 0;
+                comboTimer = 0;
+                anim.SetBool("Combo", false);
+            }
+        }
 
         if (attackInputAction.triggered)
         {
             anim.SetBool("Combo", true);
+            if (comboTimer > 0)
+            {
+                combo++;
+                if (combo > 2) combo = 0;
+                comboTimer = 0;
+            }
+            anim.SetInteger("ComboCount", combo);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             // SpawnStrike();  // Purely testing
         }
@@ -113,7 +145,9 @@ public class PlayerController : MonoBehaviour
                 chargeFX.SetInt("chargeLevel", charge);
                 if (old != charge)
                 {
+                    Debug.Log("levelUp");
                     chargeFX.SendEvent("levelUp");
+                    StartCoroutine(Flash());
                 }
             }
             // Debug.Log(holdTime);
@@ -128,13 +162,48 @@ public class PlayerController : MonoBehaviour
                 holdTime = 0;
             }
         }
+
+        HandleAnims();
+
         chargeFX.SetInt("chargeLevel", charge);
+    }
+
+    void HandleAnims()
+    {
+        // Check the current animation to see if we apply speed changes
+        AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
+        if (curState.IsName("Idle") || curState.IsName("Charge") || curState.IsName("Charge Swing"))
+        {
+            // Don't modify speed at all
+        }
+        else if (curState.IsName("Run"))  
+        {
+            // Modify anim speed based on player speed
+        } else
+        {
+            // Modify anim based on attack speed 
+        }
+    }
+
+    IEnumerator Flash()
+    {
+        float str = 1f;  // tested magic numbers
+        Color color = glowColors[charge];
+        Debug.Log(chargeGlow.GetFloat("_Strength"));
+        chargeGlow.SetFloat("_Strength", str);
+        chargeGlow.SetColor("_Color", color);
+        while (str < 2.6f)
+        {
+            str = Mathf.Lerp(str, 3.8f, 0.02f);
+            chargeGlow.SetFloat("_Strength", str);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void ActivateSlash(int index)
     {
         slashVFX[index].SetActive(true);
-        slashVFX[index].GetComponent<PlayerHitbox>().damage = damage;
+        slashVFX[index].GetComponent<PlayerHitbox>().damage = (int)Mathf.Round(1 * damageMult);
     }
 
     public void DeactivateSlash(int index)
@@ -144,6 +213,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetCombo()
     {
+        comboTimer = maxTimeBetweenCombo;
         anim.SetBool("Combo", false);
     }
 
@@ -156,7 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         swinging = false;
     }
-
+    
     public void Readjust()
     {
         if (GameManager.gamePaused) { return; }
@@ -192,6 +262,7 @@ public class PlayerController : MonoBehaviour
             r2.transform.Rotate(Vector3.up, -30);
         }
         charge = 0;
+        chargeGlow.SetColor("_Color", glowColors[0]);
     }
 
 }
