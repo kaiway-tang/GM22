@@ -73,7 +73,7 @@ public class MobileEntity : HPEntity
         vect3.z = spd;
         rb.velocity = vect3;
     }
-    protected void 
+    
 
     protected void AddXVel(float amount, float max = float.PositiveInfinity)
     {

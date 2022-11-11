@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
+
 public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 3f;
@@ -21,18 +23,30 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("target "  + target +  target.position);
-        Debug.Log("tranform" + transform.position);
+        
         float distance = Vector3.Distance(target.position, transform.position);
-        Debug.Log("distance " + distance);
         if (distance <= lookRadius)
         {
             //chase player
             agent.SetDestination(target.position);
-            Debug.Log(agent.destination);
-            Debug.Log(target.position);
+
+            if (distance <= agent.stoppingDistance) //makes sure enemy stops to attack and faces playe
+            {
+                //attack target
+                FaceTarget();
+                
+            }
+           
         }
 
+    }
+
+    void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized; //direction vector from enemy to player
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0, direction.z)); //target angle
+        //for smooth rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     private void OnDrawGizmosSelected()
