@@ -28,6 +28,7 @@ public class PlayerController : MobileEntity
     [SerializeField] Material chargeGlow;
     [SerializeField] List<Color> glowColors;
     [SerializeField] GameObject swordFX;
+    [SerializeField] VisualEffect accumulateVFX;
     VisualEffect chargeFX;
     Transform closestEnemy;
     Transform zLockTarget;
@@ -219,6 +220,35 @@ public class PlayerController : MobileEntity
         }
 
         chargeFX.SetInt("chargeLevel", charge);
+    }
+
+    public void AddCrystal(int type)
+    {
+        crystals[type]++;
+        switch (type)
+        {
+            case 0:
+            {
+                    Color color = Color.red;
+                    accumulateVFX.SetVector4("Color", color);
+                    accumulateVFX.SendEvent("Accumulate");
+                    break;
+            }
+            case 1:
+            {
+                    Color color = Color.green;
+                    accumulateVFX.SetVector4("Color", color);
+                    accumulateVFX.SendEvent("Accumulate");
+                break;
+            } 
+            case 2:
+            {
+                    Color color = Color.blue;
+                    accumulateVFX.SetVector4("Color", color);
+                    accumulateVFX.SendEvent("Accumulate");
+                    break;
+            }
+        }
     }
 
     void CalculateBuffs()
