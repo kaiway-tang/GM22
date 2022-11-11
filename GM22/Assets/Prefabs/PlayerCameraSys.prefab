@@ -2597,12 +2597,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b4cd7d89bd0e34d9d05042d61e4116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 9999
+  HP: 100
   maxHP: 100
   entityID: 0
   hitFX: {fileID: 0}
   trfm: {fileID: 4466239960789015255}
   rb: {fileID: 6917653884047779876}
+  trfm: {fileID: 4466239960789015255}
   speed: 5
   animObject: {fileID: 0}
   cam: {fileID: 2826026923489404541}
