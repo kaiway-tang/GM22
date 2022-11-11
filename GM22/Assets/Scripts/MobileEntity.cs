@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class MobileEntity : HPEntity
 {
-    [SerializeField] Transform trfm;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] protected Transform trfm;
+    [SerializeField] protected Rigidbody rb;
     Vector3 vect3;
 
     public float lookRadius = 3f;
