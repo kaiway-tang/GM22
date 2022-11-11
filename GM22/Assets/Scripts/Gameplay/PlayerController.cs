@@ -148,7 +148,7 @@ public class PlayerController : MobileEntity
             }
         }
 
-        if (inputs.Player.Execute.triggered)
+        if (inputs.Player.Execute.triggered && RageManager.rage == 100)
         {
             anim.Play("Execute");
         }
@@ -248,12 +248,6 @@ public class PlayerController : MobileEntity
         }
     }
 
-    public new void TakeDmg(int amount, int ignoreID = -1)
-    {
-        // RageManager.AddRage(-20);
-        base.TakeDmg(amount, ignoreID);
-    }
-
     // Saves your eyes from a bunch of jank
     #region Animator Events
 
@@ -313,7 +307,11 @@ public class PlayerController : MobileEntity
     public void SpawnBeam()
     {
         if (closestEnemy != null)
+        {
             StartCoroutine(DespawnBeam(Instantiate(beamVFX, closestEnemy.position, Quaternion.identity)));
+            closestEnemy.gameObject.GetComponent<Enemy>().Die();
+            RageManager.SetRage(0);
+        }
     }
 
     IEnumerator DespawnBeam(GameObject beam)
