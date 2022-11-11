@@ -4827,4 +4827,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   trfm: {fileID: 8913336866556679663}
-  spd: 0.08
+  spd: 0.11

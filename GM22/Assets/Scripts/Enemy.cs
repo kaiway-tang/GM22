@@ -7,7 +7,7 @@ public class Enemy : MobileEntity
 {
     public float lookRadius = 3f;
 
-    private Transform target; //reference from enemy to player
+    [SerializeField] private Transform target; //reference from enemy to player
 
     private NavMeshAgent agent; // reference to agent to move enemy
     // Start is called before the first frame update
