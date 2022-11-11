@@ -5,6 +5,8 @@ using UnityEngine;
 public class HPEntity : MonoBehaviour
 {
     [SerializeField] int HP, maxHP, entityID;
+    [SerializeField] GameObject hitFX;
+    [SerializeField] public Transform trfm;
 
     protected void Start()
     {
@@ -14,6 +16,7 @@ public class HPEntity : MonoBehaviour
     public void TakeDmg(int amount, int ignoreID = -1)
     {
         if (ignoreID == entityID) { return; }
+        if (hitFX) { Instantiate(hitFX, trfm.position, trfm.rotation); }
         HP -= amount;
         if (HP <= 0)
         {
