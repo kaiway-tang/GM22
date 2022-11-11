@@ -55,7 +55,7 @@ public class LaserBeam : MonoBehaviour
             offset.y = myTransform.position.y + i * myTransform.up.y + Random.Range(-noise, noise);
             //offset.z = i * myTransform.forward.z + Random.Range(-noise, noise) + myTransform.position.z;
             position[i] = offset;
-            position[0] = myTransform.position;
+            position[0] = Vector3.zero;
 
             lineRenderer.SetPosition(i, position[i]);
 
