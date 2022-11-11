@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _camTrfm;
     public static Transform camTrfm;
 
+    [SerializeField] private EnemySpawner[] spawners;
+    private int wavesCleared;
+
     private void Awake()
     {
         playerControllerScr = _playerControllerScr;
