@@ -55,7 +55,7 @@ public class HPEntity : MonoBehaviour
     }
 
     bool died = false;
-    public void Die(bool dropCore)
+    public void Die(bool dropCore = false)
     {
         if (entityID == enemy && !died)
         {

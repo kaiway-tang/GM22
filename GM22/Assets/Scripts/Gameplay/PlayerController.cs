@@ -319,7 +319,7 @@ public class PlayerController : MobileEntity
         if (closestEnemy != null)
         {
             StartCoroutine(DespawnBeam(Instantiate(beamVFX, closestEnemy.position, Quaternion.identity)));
-            closestEnemy.gameObject.GetComponent<Enemy>().Die();
+            closestEnemy.gameObject.GetComponent<Enemy>().Die(true);
             RageManager.SetRage(0);
         }
     }

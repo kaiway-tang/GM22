@@ -15,7 +15,10 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (var g in spawnLocations)
+        {
+            g.GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 
     // Update is called once per frame
