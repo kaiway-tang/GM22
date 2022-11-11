@@ -49,6 +49,7 @@ public class PlayerController : MobileEntity
     [SerializeField] float damageMult = 1; 
     [SerializeField] float attackSpeed = 1;
     [SerializeField] float moveSpeed = 1;
+    [SerializeField] float healthBoost = 1;
     List<int> crystals;
 
     // Start is called before the first frame update
@@ -247,6 +248,12 @@ public class PlayerController : MobileEntity
         }
     }
 
+    public new void TakeDmg(int amount, int ignoreID = -1)
+    {
+        // RageManager.AddRage(-20);
+        base.TakeDmg(amount, ignoreID);
+    }
+
     // Saves your eyes from a bunch of jank
     #region Animator Events
 
@@ -319,31 +326,74 @@ public class PlayerController : MobileEntity
     public void SpawnStrike()
     {
         Vector3 pos = transform.position + Vector3.up * 0f;
-        if (charge < 2)
+
+        float damage = damageMult;
+        float slowReduction = (attackSpeed - 1) * 0.1f;
+
+        if (charge == 1)
         {
-            Instantiate(strikeVFX, pos, transform.rotation);
-        } else if (charge < 3)
+            GameObject c = Instantiate(strikeVFX, pos, transform.rotation);
+            GroundStrike strike = c.GetComponentInChildren<GroundStrike>();
+            Attack atk = c.GetComponentInChildren<Attack>();
+            strike.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atk.damage = Mathf.RoundToInt(30 * damageMult);
+        } else if (charge > 1 && charge < 3)
         {
             // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * 15));
-            Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject c = Instantiate(strikeVFX, pos, transform.rotation);
+            GroundStrike strike = c.GetComponentInChildren<GroundStrike>();
+            Attack atk = c.GetComponentInChildren<Attack>();
+            strike.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atk.damage = Mathf.RoundToInt(40 * damageMult);
+
             GameObject l1 = Instantiate(strikeVFX, pos, transform.rotation);
             GameObject r1 = Instantiate(strikeVFX, pos, transform.rotation);
             l1.transform.Rotate(Vector3.up, 15);
             r1.transform.Rotate(Vector3.up, -15);
+            GroundStrike strikel1 = l1.GetComponentInChildren<GroundStrike>();
+            Attack atkl1 = l1.GetComponentInChildren<Attack>();
+            strikel1.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkl1.damage = Mathf.RoundToInt(40 * damageMult);
+            GroundStrike striker1 = r1.GetComponentInChildren<GroundStrike>();
+            Attack atkr1 = r1.GetComponentInChildren<Attack>();
+            striker1.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkr1.damage = Mathf.RoundToInt(40 * damageMult);
             // Instantiate(strikeVFX, transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 15, transform.rotation.eulerAngles.z));
             // Instantiate(strikeVFX, transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 15, transform.rotation.eulerAngles.z));
             // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * -15));
         } else
         {
-            Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject c = Instantiate(strikeVFX, pos, transform.rotation);
+            GroundStrike strike = c.GetComponentInChildren<GroundStrike>();
+            Attack atk = c.GetComponentInChildren<Attack>();
+            strike.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atk.damage = Mathf.RoundToInt(50 * damageMult);
+
             GameObject l1 = Instantiate(strikeVFX, pos, transform.rotation);
             GameObject r1 = Instantiate(strikeVFX, pos, transform.rotation);
             l1.transform.Rotate(Vector3.up, 15);
             r1.transform.Rotate(Vector3.up, -15);
+            GroundStrike strikel1 = l1.GetComponentInChildren<GroundStrike>();
+            Attack atkl1 = l1.GetComponentInChildren<Attack>();
+            strikel1.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkl1.damage = Mathf.RoundToInt(40 * damageMult);
+            GroundStrike striker1 = r1.GetComponentInChildren<GroundStrike>();
+            Attack atkr1 = r1.GetComponentInChildren<Attack>();
+            striker1.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkr1.damage = Mathf.RoundToInt(40 * damageMult);
+
             GameObject l2 = Instantiate(strikeVFX, pos, transform.rotation);
             GameObject r2 = Instantiate(strikeVFX, pos, transform.rotation);
             l2.transform.Rotate(Vector3.up, 30);
             r2.transform.Rotate(Vector3.up, -30);
+            GroundStrike strikel2 = l2.GetComponentInChildren<GroundStrike>();
+            Attack atkl2 = l2.GetComponentInChildren<Attack>();
+            strikel2.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkl2.damage = Mathf.RoundToInt(40 * damageMult);
+            GroundStrike striker2 = r2.GetComponentInChildren<GroundStrike>();
+            Attack atkr2 = r2.GetComponentInChildren<Attack>();
+            striker2.slowRate = Mathf.Max(strike.slowRate - slowReduction, 0.01f);
+            atkr2.damage = Mathf.RoundToInt(40 * damageMult);
         }
         charge = 0;
         chargeGlow.SetColor("_Color", glowColors[0]);
