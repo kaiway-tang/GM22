@@ -5,6 +5,7 @@ using UnityEngine;
 public class HPEntity : MonoBehaviour
 {
     public int HP, maxHP, entityID;
+    const int enemy = 0, player = 1;
     [SerializeField] GameObject hitFX;
     public Transform trfm;
     public float damageReduction;
@@ -18,6 +19,16 @@ public class HPEntity : MonoBehaviour
     {
         if (ignoreID == entityID) { return; }
         if (hitFX) { Instantiate(hitFX, trfm.position, trfm.rotation); }
+
+        if (entityID == enemy)
+        {
+            RageManager.AddRage(10);
+        }
+        else if (entityID == player)
+        {
+            RageManager.AddRage(-20);
+        }
+
         HP -= Mathf.RoundToInt(amount*(1-damageReduction));
         if (HP <= 0)
         {
@@ -42,7 +53,7 @@ public class HPEntity : MonoBehaviour
         }
     }
 
-    protected void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }

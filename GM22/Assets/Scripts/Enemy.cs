@@ -21,14 +21,6 @@ public class Enemy : MobileEntity
 
 
 
-    public new void TakeDmg(int amount, int ignoreID = -1)
-    {
-        RageManager.AddRage(10);
-        base.TakeDmg(amount, ignoreID);
-    }
-
-
-
     protected new void Start()
     {
         base.Start();

@@ -2599,7 +2599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 100
   maxHP: 100
-  entityID: 0
+  entityID: 1
   hitFX: {fileID: 0}
   trfm: {fileID: 4466239960789015255}
   damageReduction: 0
@@ -4764,7 +4764,7 @@ Transform:
   m_GameObject: {fileID: 5894738718558634224}
   m_LocalRotation: {x: 0.0052354545, y: -0.013874662, z: 0.000072648145, w: 0.99989}
   m_LocalPosition: {x: -7.37, y: -3.16, z: 0}
-  m_LocalScale: {x: 3, y: 6, z: 1}
+  m_LocalScale: {x: -3, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1419845371206733075}
@@ -4783,7 +4783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e572617092436c488a625329532903b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PwrScalerTrfm: {fileID: 0}
+  PwrScalerTrfm: {fileID: 4178675659560222571}
 --- !u!1 &5919699381739750317
 GameObject:
   m_ObjectHideFlags: 0
@@ -6940,7 +6940,7 @@ Transform:
   m_GameObject: {fileID: 8066876148726093922}
   m_LocalRotation: {x: 0.0052354545, y: -0.013874662, z: 0.000072648145, w: 0.99989}
   m_LocalPosition: {x: -7.37, y: -4.1, z: 0}
-  m_LocalScale: {x: 3, y: 6, z: 1}
+  m_LocalScale: {x: -3, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3798578136334982528}
@@ -8037,7 +8037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.z
