@@ -40,6 +40,13 @@ public class MobileEntity : HPEntity
         }
 
     }
+    void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized; //direction vector from enemy to player
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); //target angle
+        //for smooth rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
     private void OnDrawGizmosSelected()
     {
