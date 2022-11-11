@@ -54,11 +54,13 @@ public class HPEntity : MonoBehaviour
         }
     }
 
-    public void Die()
+    bool died = false;
+    public void Die(bool dropCore)
     {
-        if (entityID == enemy)
+        if (entityID == enemy && !died)
         {
-            GetComponent<EnemyShatter>().Shatter();
+            died = true;
+            GetComponent<EnemyShatter>().Shatter(dropCore);
         }
         Destroy(gameObject);
     }
