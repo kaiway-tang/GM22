@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Enemy : MobileEntity
 {
     [SerializeField] protected float spd;
-    [SerializeField] protected int[] cdRange; //cooldown range [min, max]
-    protected int cd;
+    [SerializeField] protected float[] cdRange; //cooldown range [min, max]
+    protected float cd;
 
     public float lookRadius = 3f;
 
