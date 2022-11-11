@@ -6,7 +6,7 @@ public class HPEntity : MonoBehaviour
 {
     [SerializeField] int HP, maxHP, entityID;
 
-    protected void _Start()
+    protected void Start()
     {
         maxHP = HP;
     }

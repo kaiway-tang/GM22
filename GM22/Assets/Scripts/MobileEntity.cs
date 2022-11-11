@@ -8,10 +8,6 @@ public class MobileEntity : HPEntity
     [SerializeField] Transform trfm;
     [SerializeField] Rigidbody rb;
     Vector3 vect3;
-    protected new void _Start()
-    {
-        base._Start();
-    }
 
     public float lookRadius = 3f;
 
@@ -19,8 +15,10 @@ public class MobileEntity : HPEntity
 
     private NavMeshAgent agent; // reference to agent to move enemy
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
+        base.Start();
+
         agent = GetComponent<NavMeshAgent>();
         target = PlayerManager.instance.player.transform;
         //convert game object to type transform
