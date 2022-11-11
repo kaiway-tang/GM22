@@ -49,7 +49,7 @@ public class PlayerController : MobileEntity
     [SerializeField] float damageMult = 1; 
     [SerializeField] float attackSpeed = 1;
     [SerializeField] float moveSpeed = 1;
-
+    List<int> crystals;
 
     // Start is called before the first frame update
     new void Start()
@@ -59,6 +59,10 @@ public class PlayerController : MobileEntity
         anim = GetComponent<Animator>();
         chargeFX = swordFX.GetComponentInChildren<VisualEffect>();
         Cursor.lockState = CursorLockMode.Locked;  // Finally remembered to do this
+        crystals = new List<int>();  // Stores player's held crystals
+        crystals.Add(0);  // red
+        crystals.Add(0);  // green
+        crystals.Add(0);  // blue
     }
 
     private void OnEnable()
@@ -80,6 +84,7 @@ public class PlayerController : MobileEntity
     void Update()
     {
         CheckForEnemies();  // For camera locking
+
         if (camlockInputAction.triggered)
             zLocked = !zLocked;
 
@@ -90,6 +95,8 @@ public class PlayerController : MobileEntity
             targetCam.ZTarget(closestEnemy.gameObject);
         else
             targetCam.Normal();
+
+        // Bulk of gameplay code below
 
         if (!swinging)
         {
@@ -198,6 +205,13 @@ public class PlayerController : MobileEntity
         chargeFX.SetInt("chargeLevel", charge);
     }
 
+    void CalculateBuffs()
+    {
+        int red = crystals[0];
+        int green = crystals[1];
+        int blue = crystals[2];
+    }
+
     void CheckForEnemies()
     {
         Collider[] hit = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("EnemyHB"));
@@ -222,7 +236,7 @@ public class PlayerController : MobileEntity
     {
         float str = 1f;  // tested magic numbers
         Color color = glowColors[charge];
-        Debug.Log(chargeGlow.GetFloat("_Strength"));
+        // Debug.Log(chargeGlow.GetFloat("_Strength"));
         chargeGlow.SetFloat("_Strength", str);
         chargeGlow.SetColor("_Color", color);
         while (str < 2.6f)
@@ -232,6 +246,9 @@ public class PlayerController : MobileEntity
             yield return new WaitForEndOfFrame();
         }
     }
+
+    // Saves your eyes from a bunch of jank
+    #region Animator Events
 
     public void ActivateSlash(int index)
     {
@@ -266,6 +283,26 @@ public class PlayerController : MobileEntity
         transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
     }
 
+    public void ChargeExecute()
+    {
+        StartCoroutine(YellowFlash());
+    }
+
+    IEnumerator YellowFlash()
+    {
+        float str = 1f;  // tested magic numbers
+        Color color = glowColors[2];
+        // Debug.Log(chargeGlow.GetFloat("_Strength"));
+        chargeGlow.SetFloat("_Strength", str);
+        chargeGlow.SetColor("_Color", color);
+        while (str < 2.6f)
+        {
+            str = Mathf.Lerp(str, 3.8f, 0.02f);
+            chargeGlow.SetFloat("_Strength", str);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     public void SpawnBeam()
     {
         if (closestEnemy != null)
@@ -274,6 +311,7 @@ public class PlayerController : MobileEntity
 
     IEnumerator DespawnBeam(GameObject beam)
     {
+        chargeGlow.SetColor("_Color", glowColors[0]);
         yield return new WaitForSeconds(2f);
         Destroy(beam);
     }
@@ -311,4 +349,5 @@ public class PlayerController : MobileEntity
         chargeGlow.SetColor("_Color", glowColors[0]);
     }
 
+    #endregion
 }

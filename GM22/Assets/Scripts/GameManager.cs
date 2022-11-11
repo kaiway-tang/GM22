@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static Transform camTrfm;
 
     [SerializeField] private EnemySpawner[] spawners;
+    EnemySpawner curSpawner;
     private int wavesCleared;
 
     private void Awake()
@@ -25,7 +26,24 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
+
+        if (!gamePaused)
+        {
+            SpawnWaves();
+        }
     }
+
+    void SpawnWaves()
+    {
+        if (curSpawner == null || curSpawner.enemies.Count == 0)
+        {
+            int index = Mathf.RoundToInt(Random.Range(0, spawners.Length));
+            curSpawner = spawners[index];
+            curSpawner.Spawn();
+        }
+        
+    }
+
     public static void Pause()
     {
         Cursor.lockState = CursorLockMode.None;
