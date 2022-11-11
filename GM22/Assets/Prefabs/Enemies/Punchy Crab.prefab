@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 95015364763691935}
   - component: {fileID: 384943734405624615}
   - component: {fileID: 7310188490005064034}
+  - component: {fileID: 4435997550683599977}
   m_Layer: 8
   m_Name: Punchy Crab
   m_TagString: Untagged
@@ -131,6 +132,7 @@ MonoBehaviour:
   entityID: 0
   hitFX: {fileID: 3072392546844146685, guid: d630c9697173b9945b6c3e9fd74433af, type: 3}
   trfm: {fileID: 0}
+  damageReduction: 0
   rb: {fileID: 0}
   spd: 3
   cdRange:
@@ -141,6 +143,20 @@ MonoBehaviour:
   attackingRange: 4
   projectile: {fileID: 8913336866556679652, guid: 497c4a0e1a0a41146991ca4e8b46cb0b, type: 3}
   anim: {fileID: 9075253647288678612}
+--- !u!114 &4435997550683599977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427202560040381205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb41a278b513e4ae2a99a022a1454eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shatteredEnemy: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+  core: {fileID: 0}
 --- !u!1 &1737802331124591848
 GameObject:
   m_ObjectHideFlags: 0

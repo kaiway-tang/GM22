@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 4863399582973055366}
   - component: {fileID: 8172333811176863620}
   - component: {fileID: 7293083713043843186}
+  - component: {fileID: 5710606438602299045}
   m_Layer: 8
   m_Name: Shooty Crab
   m_TagString: Untagged
@@ -297,6 +298,7 @@ MonoBehaviour:
   entityID: 0
   hitFX: {fileID: 3072392546844146685, guid: d630c9697173b9945b6c3e9fd74433af, type: 3}
   trfm: {fileID: 0}
+  damageReduction: 0
   rb: {fileID: 0}
   spd: 1.7
   cdRange:
@@ -307,6 +309,20 @@ MonoBehaviour:
   attackingRange: 20
   projectile: {fileID: 8913336866556679652, guid: c53ca4b975cbe99468a2888f4b06e4d8, type: 3}
   anim: {fileID: 2100550455476909670}
+--- !u!114 &5710606438602299045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775519298411432531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb41a278b513e4ae2a99a022a1454eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shatteredEnemy: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+  core: {fileID: 0}
 --- !u!1 &1331523193461901106
 GameObject:
   m_ObjectHideFlags: 0

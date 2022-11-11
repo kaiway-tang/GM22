@@ -179,6 +179,7 @@ MonoBehaviour:
   entityID: 0
   hitFX: {fileID: 0}
   trfm: {fileID: 0}
+  damageReduction: 0
   rb: {fileID: 0}
   speed: 5
   animObject: {fileID: 1082271958213353595}
@@ -197,6 +198,7 @@ MonoBehaviour:
   damageMult: 1
   attackSpeed: 1
   moveSpeed: 1
+  healthBoost: 1
 --- !u!54 &465616503
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3577,6 +3579,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1511091844244989675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475239980247044605, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_Name
+      value: shatteredCrab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
 --- !u!4 &1564860333357031490
 Transform:
   m_ObjectHideFlags: 0
