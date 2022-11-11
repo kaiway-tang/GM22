@@ -7,10 +7,13 @@ public class GameManager : MonoBehaviour
     public static bool gamePaused;
     [SerializeField] private PlayerController _playerControllerScr;
     public static PlayerController playerControllerScr;
+    [SerializeField] private Transform _camTrfm;
+    public static Transform camTrfm;
 
     private void Awake()
     {
         playerControllerScr = _playerControllerScr;
+        camTrfm = _camTrfm;
     }
 
     private void Update()
@@ -42,6 +45,15 @@ public class GameManager : MonoBehaviour
         Quaternion lookRotation;
         if (usePitch) { lookRotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z)); } //target angle
         else { lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); }
+        //for smooth rotation
+        origin.rotation = Quaternion.Slerp(origin.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    public static void FaceCamera(Transform origin)
+    {
+        Vector3 direction = (camTrfm.position - origin.position).normalized; //direction vector from enemy to player
+        Quaternion lookRotation;
+        lookRotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z));
         //for smooth rotation
         origin.rotation = Quaternion.Slerp(origin.rotation, lookRotation, Time.deltaTime * 5f);
     }

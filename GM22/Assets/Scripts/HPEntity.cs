@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] int HP, maxHP, entityID;
+    [SerializeField] public int HP, maxHP, entityID;
     [SerializeField] GameObject hitFX;
     [SerializeField] public Transform trfm;
 

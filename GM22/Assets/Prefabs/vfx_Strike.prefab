@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 3821787557875581852}
   - component: {fileID: 2768853805946589707}
   - component: {fileID: 1110719764113826909}
-  m_Layer: 6
+  - component: {fileID: 1284766307467042077}
+  m_Layer: 7
   m_Name: strike
   m_TagString: VFX
   m_Icon: {fileID: 0}
@@ -160,6 +161,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0049977, y: 3.985485, z: 3.0607448}
   m_Center: {x: 0, y: 1.93, z: 0}
+--- !u!114 &1284766307467042077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013909130607345182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &8968412139518979475
 GameObject:
   m_ObjectHideFlags: 0

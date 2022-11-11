@@ -5,7 +5,14 @@ using UnityEngine.AI;
 
 public class Enemy : MobileEntity
 {
+    [SerializeField] protected float spd;
+    [SerializeField] protected int[] cdRange; //cooldown range [min, max]
+    protected int cd;
+
     public float lookRadius = 3f;
+
+    public int trackingRange;
+    public int attackingRange;
 
     private Transform target; //reference from enemy to player
 
@@ -14,15 +21,17 @@ public class Enemy : MobileEntity
     protected new void Start()
     {
         base.Start();
+        trackingRange = trackingRange * trackingRange;
+        attackingRange = attackingRange * attackingRange;
         agent = GetComponent<NavMeshAgent>();
         target = GameManager.playerControllerScr.trfm;
         //convert game object to type transform
     }
 
     // Update is called once per frame
-    void Update()
+    protected void FixedUpdate()
     {
-        FollowTarget();
+        //FollowTarget();
     }
 
     protected void FaceTarget()

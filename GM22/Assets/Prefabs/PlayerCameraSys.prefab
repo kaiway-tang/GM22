@@ -2603,7 +2603,6 @@ MonoBehaviour:
   hitFX: {fileID: 0}
   trfm: {fileID: 4466239960789015255}
   rb: {fileID: 6917653884047779876}
-  trfm: {fileID: 4466239960789015255}
   speed: 5
   animObject: {fileID: 0}
   cam: {fileID: 2826026923489404541}
@@ -7689,6 +7688,10 @@ PrefabInstance:
       value: 16384
       objectReference: {fileID: 0}
     - target: {fileID: 3579908564944310588, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: _camTrfm
+      value: 
+      objectReference: {fileID: 2826026923489404538}
+    - target: {fileID: 3579908564944310588, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: _playerControllerScr
       value: 
       objectReference: {fileID: 2769354019803393519}
@@ -7705,6 +7708,11 @@ PrefabInstance:
 --- !u!4 &2826026923454842407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1365097988855070123, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+  m_PrefabInstance: {fileID: 3875872912623352716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2826026923489404538 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
   m_PrefabInstance: {fileID: 3875872912623352716}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2826026923489404541 stripped

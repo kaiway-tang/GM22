@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 8353533396378242829}
   - component: {fileID: 1530814875885328615}
   m_Layer: 8
-  m_Name: ShootingEnemy
+  m_Name: MeleeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,12 +386,12 @@ MonoBehaviour:
   hitFX: {fileID: 3072392546844146685, guid: d630c9697173b9945b6c3e9fd74433af, type: 3}
   trfm: {fileID: 8353533396378242824}
   rb: {fileID: 8353533396378242829}
-  spd: 1.7
-  cdRange: 4b0000007d000000
+  spd: 3
+  cdRange: 1900000019000000
   lookRadius: 60
   trackingRange: 80
-  attackingRange: 20
-  projectile: {fileID: 8913336866556679652, guid: c53ca4b975cbe99468a2888f4b06e4d8, type: 3}
+  attackingRange: 4
+  projectile: {fileID: 8913336866556679652, guid: 497c4a0e1a0a41146991ca4e8b46cb0b, type: 3}
 --- !u!54 &8353533396378242829
 Rigidbody:
   m_ObjectHideFlags: 0
