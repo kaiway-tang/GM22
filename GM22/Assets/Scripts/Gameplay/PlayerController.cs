@@ -102,7 +102,7 @@ public class PlayerController : MobileEntity
 
         if (!zLocked)
             targetCam.Normal();
-
+        anim.SetBool("zLocked", zLocked);
         // Bulk of gameplay code below
 
         if (!swinging)
