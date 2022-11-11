@@ -6,7 +6,7 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] int damage;
 
-    private void OnTriggerEnter(Collider col)
+    protected void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.layer == 6 || col.gameObject.layer == 8)
         {

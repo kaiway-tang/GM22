@@ -40,7 +40,7 @@ public class Enemy : MobileEntity
 
     }
 
-    void FaceTarget()
+    protected void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized; //direction vector from enemy to player
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0, direction.z)); //target angle
