@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MobileEntity
 {
-    // Start is called before the first frame update
+    protected Transform target;
     protected new void _Start()
     {
         base._Start();
