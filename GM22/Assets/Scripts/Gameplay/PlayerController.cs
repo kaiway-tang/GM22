@@ -88,14 +88,19 @@ public class PlayerController : MobileEntity
         CheckForEnemies();  // For camera locking
 
         if (camlockInputAction.triggered)
+        {
             zLocked = !zLocked;
+            if (zLocked)
+            {
+                targetCam.ZTarget(closestEnemy.gameObject);
+                zLockTarget = closestEnemy;
+            }
+        }
 
         if (closestEnemy == null)
             zLocked = false;
 
-        if (zLocked)
-            targetCam.ZTarget(closestEnemy.gameObject);
-        else
+        if (!zLocked)
             targetCam.Normal();
 
         // Bulk of gameplay code below
