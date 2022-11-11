@@ -18,6 +18,17 @@ public class Enemy : MobileEntity
 
     private NavMeshAgent agent; // reference to agent to move enemy
     // Start is called before the first frame update
+
+
+
+    public new void TakeDmg(int amount, int ignoreID = -1)
+    {
+        RageManager.AddRage(10);
+        base.TakeDmg(amount, ignoreID);
+    }
+
+
+
     protected new void Start()
     {
         base.Start();

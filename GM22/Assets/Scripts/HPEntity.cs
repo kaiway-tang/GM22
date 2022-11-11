@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] public int HP, maxHP, entityID;
+    public int HP, maxHP, entityID;
     [SerializeField] GameObject hitFX;
-    [SerializeField] public Transform trfm;
+    public Transform trfm;
+    public float damageReduction;
 
     protected void Start()
     {
@@ -17,7 +18,7 @@ public class HPEntity : MonoBehaviour
     {
         if (ignoreID == entityID) { return; }
         if (hitFX) { Instantiate(hitFX, trfm.position, trfm.rotation); }
-        HP -= amount;
+        HP -= Mathf.RoundToInt(amount*(1-damageReduction));
         if (HP <= 0)
         {
             Die();
