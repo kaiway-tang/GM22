@@ -12,6 +12,9 @@ public class PlayerController : MobileEntity
     private InputAction attackInputAction;
     private InputAction moveInputAction;
 
+    private InputAction sprintInputAction;
+    
+    Rigidbody rb;
     Animator anim;
     [SerializeField] float speed = 5f;
 
@@ -32,7 +35,9 @@ public class PlayerController : MobileEntity
     [Tooltip("Time required to charge up 1 state")] [SerializeField] float timePerChargePhase = 1f;
     bool swinging = false;
     int combo = 0;
+    bool sprinting = false;
     [SerializeField] float maxTimeBetweenCombo = 0.6f;
+    [SerializeField] float sprintModifier = 2f;
     float comboTimer = 0;
 
 
@@ -60,6 +65,7 @@ public class PlayerController : MobileEntity
         inputs = new GM22();
         attackInputAction = inputs.Player.Attack;
         moveInputAction = inputs.Player.Move;
+        sprintInputAction = inputs.Player.Sprint;
         inputs.Enable();
     }
 
@@ -82,12 +88,14 @@ public class PlayerController : MobileEntity
 
             float totSpeed = speed * moveSpeed;  // Base speed (speed) times speed multiplier (moveSpeed)
 
+            if (sprinting) totSpeed *= sprintModifier;
+
             // Always face direction of movement
             if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
             if (!notMoving)
-                rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * totSpeed);
+                rb.velocity = new Vector3(direction.x * totSpeed, rb.velocity.y, direction.z * totSpeed);
             else
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         } else
@@ -99,7 +107,10 @@ public class PlayerController : MobileEntity
         // Control animations
         anim.SetBool("Moving", rb.velocity.magnitude - rb.velocity.y > 0.05f);
         anim.SetFloat("atkSpeed", attackSpeed);
-        anim.SetFloat("moveSpeed", moveSpeed);
+        if (sprinting)
+            anim.SetFloat("moveSpeed", moveSpeed * sprintModifier);
+        else
+            anim.SetFloat("moveSpeed", moveSpeed);
 
         // Control combo state
         AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
@@ -128,6 +139,8 @@ public class PlayerController : MobileEntity
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             // SpawnStrike();  // Purely testing
         }
+
+        sprinting = sprintInputAction.IsPressed();
 
         // True or false based on if it's pressed the current frame
         if (attackInputAction.IsPressed())
@@ -235,15 +248,16 @@ public class PlayerController : MobileEntity
 
     public void SpawnStrike()
     {
+        Vector3 pos = transform.position + Vector3.up * 0f;
         if (charge < 2)
         {
-            Instantiate(strikeVFX, transform.position, transform.rotation);
+            Instantiate(strikeVFX, pos, transform.rotation);
         } else if (charge < 3)
         {
             // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * 15));
-            Instantiate(strikeVFX, transform.position, transform.rotation);
-            GameObject l1 = Instantiate(strikeVFX, transform.position, transform.rotation);
-            GameObject r1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject l1 = Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject r1 = Instantiate(strikeVFX, pos, transform.rotation);
             l1.transform.Rotate(Vector3.up, 15);
             r1.transform.Rotate(Vector3.up, -15);
             // Instantiate(strikeVFX, transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 15, transform.rotation.eulerAngles.z));
@@ -251,13 +265,13 @@ public class PlayerController : MobileEntity
             // Instantiate(strikeVFX, transform.position, transform.rotation * Quaternion.Euler(Vector3.up * -15));
         } else
         {
-            Instantiate(strikeVFX, transform.position, transform.rotation);
-            GameObject l1 = Instantiate(strikeVFX, transform.position, transform.rotation);
-            GameObject r1 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject l1 = Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject r1 = Instantiate(strikeVFX, pos, transform.rotation);
             l1.transform.Rotate(Vector3.up, 15);
             r1.transform.Rotate(Vector3.up, -15);
-            GameObject l2 = Instantiate(strikeVFX, transform.position, transform.rotation);
-            GameObject r2 = Instantiate(strikeVFX, transform.position, transform.rotation);
+            GameObject l2 = Instantiate(strikeVFX, pos, transform.rotation);
+            GameObject r2 = Instantiate(strikeVFX, pos, transform.rotation);
             l2.transform.Rotate(Vector3.up, 30);
             r2.transform.Rotate(Vector3.up, -30);
         }
