@@ -7,7 +7,7 @@ public class GroundStrike : MonoBehaviour
 {
     [SerializeField] float speed = 10f;
     [Tooltip("Height this strike will check to find a ground and warp to. If it finds nothing, it will move to y=0.")]
-    [SerializeField] float detectionDistance = 2f;
+    [SerializeField] float detectionDistance = 5f;
     [SerializeField] LayerMask layers;
 
     [SerializeField] float slowRate = 0.1f;
@@ -29,7 +29,7 @@ public class GroundStrike : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up * .7f, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
+        if (Physics.Raycast(transform.position + Vector3.up * 2.5f, transform.TransformDirection(Vector3.down), out hit, detectionDistance, layers))
         {
             transform.parent.position = new Vector3(transform.parent.position.x, hit.point.y, transform.parent.position.z);
         } else

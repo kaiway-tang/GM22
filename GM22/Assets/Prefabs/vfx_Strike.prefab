@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  detectionDistance: 2
+  detectionDistance: 5
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 16385
   slowRate: 0.12
 --- !u!2083052967 &1208816347991312459
 VisualEffect:
