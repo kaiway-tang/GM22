@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +24,11 @@ public class GameManager : MonoBehaviour
         self = GetComponent<GameManager>();
         playerControllerScr = _playerControllerScr;
         camTrfm = _camTrfm;
+    }
+
+    private void Start()
+    {
+        spawners = FindObjectsOfType<EnemySpawner>();
     }
 
     private void Update()

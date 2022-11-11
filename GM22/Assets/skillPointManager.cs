@@ -14,24 +14,21 @@ public class skillPointManager : MonoBehaviour
         move[2] = new Vector3(0,-1,0);
     }
 
-    public void IncrementAttack()
+    public void SetAttack(float i)
     {
-        ProcessIncrement(0);
+        ProcessIncrement(0, i);
     }
-    public void IncrementHP()
+    public void SetHP(float i)
     {
-        ProcessIncrement(1);
+        ProcessIncrement(1, i);
     }
-    public void IncrementSpeed()
+    public void SetSpeed(float i)
     {
-        ProcessIncrement(2);
+        ProcessIncrement(2, i);
     }
 
-    void ProcessIncrement(int ID)
+    void ProcessIncrement(int ID, float i)
     {
-        skillPoints[ID].localPosition += move[ID] * .2f;
-        //pointLines[0].position = skillPoints[1].position - skillPoints[0].position;
-        //pointLines[1].position = skillPoints[2].position - skillPoints[1].position;
-        //pointLines[2].position = skillPoints[0].position - skillPoints[2].position;
+        skillPoints[ID].localPosition = move[ID] * i * 0.5f;
     }
 }

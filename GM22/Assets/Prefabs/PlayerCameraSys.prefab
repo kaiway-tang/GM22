@@ -2800,6 +2800,7 @@ MonoBehaviour:
   attackSpeed: 1
   moveSpeed: 1
   healthBoost: 1
+  skillPointManager: {fileID: 1703523129888192426}
 --- !u!136 &7251567216126993411
 CapsuleCollider:
   m_ObjectHideFlags: 0
