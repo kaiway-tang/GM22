@@ -7,7 +7,7 @@ public class Enemy : MobileEntity
 {
     public float lookRadius = 3f;
 
-    [SerializeField] private Transform target; //reference from enemy to player
+    private Transform target; //reference from enemy to player
 
     private NavMeshAgent agent; // reference to agent to move enemy
     // Start is called before the first frame update
@@ -47,6 +47,7 @@ public class Enemy : MobileEntity
         //for smooth rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+    
 
     private void OnDrawGizmosSelected()
     {
