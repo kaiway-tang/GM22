@@ -18,6 +18,6 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
 
-    //public game object that refernces player
+    //public game object that references player
     public GameObject player;
 }
