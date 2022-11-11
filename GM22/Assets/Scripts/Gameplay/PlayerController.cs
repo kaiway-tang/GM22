@@ -30,6 +30,7 @@ public class PlayerController : MobileEntity
     [SerializeField] GameObject swordFX;
     VisualEffect chargeFX;
     Transform closestEnemy;
+    Transform zLockTarget;
 
     int charge = 0;
     int maxStage = 3;
@@ -112,8 +113,17 @@ public class PlayerController : MobileEntity
 
             if (sprinting) totSpeed *= sprintModifier;
 
-            // Always face direction of movement
-            if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
+            // Always face direction of movement, unless you're locked
+            if (zLocked)
+            {
+                anim.SetFloat("horiMove", moveInputAction.ReadValue<Vector2>().x);
+                anim.SetFloat("vertMove", moveInputAction.ReadValue<Vector2>().y);
+                transform.forward = (zLockTarget.position - transform.position).normalized;
+            }
+            else
+            {
+                if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
+            }
 
             // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
             if (!notMoving)
@@ -319,6 +329,16 @@ public class PlayerController : MobileEntity
         chargeGlow.SetColor("_Color", glowColors[0]);
         yield return new WaitForSeconds(2f);
         Destroy(beam);
+    }
+
+    public void StartSlide()
+    {
+
+    }
+
+    public void StopSlide()
+    {
+
     }
 
     public void SpawnStrike()
