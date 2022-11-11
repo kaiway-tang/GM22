@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class UISplittingObject : UIObj
 {
-    [SerializeField] GameObject[] objs; //0: slash
-    [SerializeField] Vector2 offset;
+    [SerializeField] GameObject[] objs;
     [SerializeField] SpriteRenderer rend;
 
     private new void OnEnable()
     {
         base.OnEnable();
 
-        for (int i = 1; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             objs[i].SetActive(false);
             objs[i].transform.localPosition = Vector3.zero;
@@ -26,16 +25,9 @@ public class UISplittingObject : UIObj
         if (Input.GetMouseButtonDown(0) && isTouching)
         {
             doSlash();
+            objs[0].SetActive(true);
             objs[1].SetActive(true);
-            objs[2].SetActive(true);
             rend.enabled = false;
         }
-    }
-
-    void doSlash()
-    {
-        Transform slashFX = Instantiate(objs[0], trfm.position + trfm.right * offset.x + trfm.up * offset.y, trfm.rotation).transform;
-        slashFX.parent = UIParent;
-        slashFX.Rotate(Vector3.forward * 15);
     }
 }
