@@ -222,7 +222,7 @@ public class PlayerController : MobileEntity
     {
         float str = 1f;  // tested magic numbers
         Color color = glowColors[charge];
-        Debug.Log(chargeGlow.GetFloat("_Strength"));
+        // Debug.Log(chargeGlow.GetFloat("_Strength"));
         chargeGlow.SetFloat("_Strength", str);
         chargeGlow.SetColor("_Color", color);
         while (str < 2.6f)
@@ -266,6 +266,26 @@ public class PlayerController : MobileEntity
         transform.position += new Vector3(animObject.transform.localPosition.x, 0, animObject.transform.localPosition.z);
     }
 
+    public void ChargeExecute()
+    {
+        StartCoroutine(YellowFlash());
+    }
+
+    IEnumerator YellowFlash()
+    {
+        float str = 1f;  // tested magic numbers
+        Color color = glowColors[2];
+        // Debug.Log(chargeGlow.GetFloat("_Strength"));
+        chargeGlow.SetFloat("_Strength", str);
+        chargeGlow.SetColor("_Color", color);
+        while (str < 2.6f)
+        {
+            str = Mathf.Lerp(str, 3.8f, 0.02f);
+            chargeGlow.SetFloat("_Strength", str);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     public void SpawnBeam()
     {
         if (closestEnemy != null)
@@ -274,6 +294,7 @@ public class PlayerController : MobileEntity
 
     IEnumerator DespawnBeam(GameObject beam)
     {
+        chargeGlow.SetColor("_Color", glowColors[0]);
         yield return new WaitForSeconds(2f);
         Destroy(beam);
     }
