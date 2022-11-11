@@ -22,6 +22,11 @@ public class Attack : MonoBehaviour
         {
             col.GetComponent<HPEntity>().TakeDmg(damage);
             return true;
+        }else if (col.gameObject.GetComponent<Core>() != null)
+        {
+            GameManager.playerControllerScr.AddCrystal(col.gameObject.GetComponent<Core>().crystalType);
+            Destroy(col.gameObject);
+            return true;
         }
         return false;
     }

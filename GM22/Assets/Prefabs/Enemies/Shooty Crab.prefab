@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 416f438271d760d4a87852a0f816dec7, type: 2}
+  - {fileID: 2100000, guid: 283cc14726b65f844a2edbbe05967598, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shatteredEnemy: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
-  core: {fileID: 8679961166559624952, guid: ddd9ba35e5bd54fc8ab9fb236470b8c2, type: 3}
+  core: {fileID: 6102167141133737189, guid: f218319f2acdd064e9163cf66899d3e9, type: 3}
 --- !u!1 &1331523193461901106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a60df3695c6e61a448f8ab95dd134385, type: 2}
+  - {fileID: 2100000, guid: dde4bfa0759041f41a1c0ca3a6b87634, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1699,7 +1699,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0e6b399b6e7064a42aefcd16e65a35f9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b196a56b109b29c47a10ea9ff45ce8ef, type: 2}
+      objectReference: {fileID: 2100000, guid: 283cc14726b65f844a2edbbe05967598, type: 2}
     - target: {fileID: -7511558181221131132, guid: 0e6b399b6e7064a42aefcd16e65a35f9, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1707,11 +1707,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0e6b399b6e7064a42aefcd16e65a35f9, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: dde4bfa0759041f41a1c0ca3a6b87634, type: 2}
+      objectReference: {fileID: 2100000, guid: 283cc14726b65f844a2edbbe05967598, type: 2}
     - target: {fileID: -7511558181221131132, guid: 0e6b399b6e7064a42aefcd16e65a35f9, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: 65596bf94f16837469e50b86136775d1, type: 2}
+      objectReference: {fileID: 2100000, guid: 283cc14726b65f844a2edbbe05967598, type: 2}
     - target: {fileID: 919132149155446097, guid: 0e6b399b6e7064a42aefcd16e65a35f9, type: 3}
       propertyPath: m_Name
       value: crabShell
