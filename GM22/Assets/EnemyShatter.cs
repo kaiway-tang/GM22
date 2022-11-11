@@ -18,9 +18,9 @@ public class EnemyShatter : MonoBehaviour
     //    }
     //}
 
-    public void Shatter()
+    public void Shatter(bool dropCore = false)
     {
         Instantiate(shatteredEnemy, transform.position, Quaternion.identity);
-        Instantiate(core, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        if (dropCore) { Instantiate(core, transform.position + new Vector3(0, 1, 0), Quaternion.identity); }
     }
 }
