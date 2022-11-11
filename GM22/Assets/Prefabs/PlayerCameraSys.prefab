@@ -3575,9 +3575,21 @@ MonoBehaviour:
   - {fileID: 6051777858151539229}
   - {fileID: 1192746852563561206}
   strikeVFX: {fileID: 8968412139518979475, guid: e15369e4928a12d40993c06e41023aef, type: 3}
+  chargeGlow: {fileID: 2100000, guid: 51d3377f399ad0842a2752459f6ec43c, type: 2}
+  glowColors:
+  - {r: 0, g: 0.92584705, b: 1, a: 0.99607843}
+  - {r: 1, g: 0.58133626, b: 0, a: 0.9764706}
+  - {r: 0.9654283, g: 0.9716981, b: 0, a: 0.92156863}
+  - {r: 0.43039846, g: 1, b: 0, a: 0.9490196}
   swordFX: {fileID: 9016343428389850758}
   holdTimeForCharge: 0.5
   timePerChargePhase: 1
+  maxTimeBetweenCombo: 0.6
+  damageMult: 1
+  attackSpeed: 1
+  moveSpeed: 1
+  maxHealth: 100
+  curHealth: 100
 --- !u!1 &2900288350341237938
 GameObject:
   m_ObjectHideFlags: 0
@@ -4885,9 +4897,17 @@ MonoBehaviour:
   - {fileID: 3677432862681107630}
   - {fileID: 2326317665058621598}
   strikeVFX: {fileID: 8968412139518979475, guid: e15369e4928a12d40993c06e41023aef, type: 3}
+  chargeGlow: {fileID: 0}
+  glowColors: []
   swordFX: {fileID: 0}
   holdTimeForCharge: 0.5
   timePerChargePhase: 1
+  maxTimeBetweenCombo: 0.6
+  damageMult: 1
+  attackSpeed: 1
+  moveSpeed: 1
+  maxHealth: 100
+  curHealth: 100
 --- !u!1 &4203942676699268637
 GameObject:
   m_ObjectHideFlags: 0
