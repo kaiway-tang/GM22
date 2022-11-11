@@ -11,7 +11,7 @@ public class HPEntity : MonoBehaviour
         maxHP = HP;
     }
 
-    protected void TakeDmg(int amount, int ignoreID = -1)
+    public void TakeDmg(int amount, int ignoreID = -1)
     {
         if (ignoreID == entityID) { return; }
         HP -= amount;
@@ -21,7 +21,7 @@ public class HPEntity : MonoBehaviour
         }
     }
 
-    protected void Heal(int amount)
+    public void Heal(int amount)
     {
         HP += amount;
         if (HP > maxHP)
