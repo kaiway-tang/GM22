@@ -29,6 +29,14 @@ public class HPEntity : MonoBehaviour
             HP = maxHP;
         }
     }
+    public void IncreaseMaxHP(int amount, bool increaseCurrentHP = true)
+    {
+        maxHP += amount;
+        if (increaseCurrentHP)
+        {
+            HP += amount;
+        }
+    }
 
     protected void Die()
     {
