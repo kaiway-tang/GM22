@@ -9,6 +9,7 @@ public class HPEntity : MonoBehaviour
     [SerializeField] GameObject hitFX;
     public Transform trfm;
     public float damageReduction;
+    public bool invulnerable;
 
     protected void Start()
     {
@@ -17,7 +18,7 @@ public class HPEntity : MonoBehaviour
 
     public void TakeDmg(int amount, int ignoreID = -1)
     {
-        if (ignoreID == entityID) { return; }
+        if (ignoreID == entityID || invulnerable) { return; }
         if (hitFX) { Instantiate(hitFX, trfm.position, trfm.rotation); }
 
         if (entityID == enemy)
@@ -55,6 +56,10 @@ public class HPEntity : MonoBehaviour
 
     public void Die()
     {
+        if (entityID == enemy)
+        {
+            GetComponent<EnemyShatter>().Shatter();
+        }
         Destroy(gameObject);
     }
 }

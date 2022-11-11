@@ -2628,6 +2628,7 @@ MonoBehaviour:
   damageMult: 1
   attackSpeed: 1
   moveSpeed: 1
+  healthBoost: 1
 --- !u!136 &7251567216126993411
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4763,8 +4764,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5894738718558634224}
   m_LocalRotation: {x: 0.0052354545, y: -0.013874662, z: 0.000072648145, w: 0.99989}
-  m_LocalPosition: {x: -7.37, y: -3.16, z: 0}
-  m_LocalScale: {x: -3, y: 6, z: 1}
+  m_LocalPosition: {x: -7.07, y: -3.4, z: 0}
+  m_LocalScale: {x: -3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1419845371206733075}

@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shatteredEnemy: {fileID: 2248081672302234439, guid: a8eaed9579e2ecc4d870bdf792ba52a8, type: 3}
-  core: {fileID: 0}
+  core: {fileID: 8679961166559624952, guid: ddd9ba35e5bd54fc8ab9fb236470b8c2, type: 3}
 --- !u!1 &1737802331124591848
 GameObject:
   m_ObjectHideFlags: 0
