@@ -8752,15 +8752,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.07
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.01
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 188.26
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 1365097988820540918, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8860,7 +8860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1537154600489114163, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_CollideAgainst.m_Bits
-      value: 16384
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1933475791993593243, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: slashObj
@@ -8890,6 +8890,10 @@ PrefabInstance:
       propertyPath: _playerControllerScr
       value: 
       objectReference: {fileID: 2769354019803393519}
+    - target: {fileID: 3740905152750987559, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3957160629228021507, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
