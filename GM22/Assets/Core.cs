@@ -8,6 +8,9 @@ public class Core : MonoBehaviour
 
     public Material mt;
     public Color32[] colors;
+    [SerializeField] int hp = 3;
+    int invincibilityFrames = 30;
+    bool hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +36,43 @@ public class Core : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Random.Range(-0.1f, 0.1f);
-        float y = Random.Range(-0.1f, 0.1f);
-        float z = Random.Range(-0.1f, 0.1f);
-        rigidbody.AddForce(new Vector3(x, y, z));
+        float x = Random.Range(-0.3f, 0.3f);
+        float y = Random.Range(-0.3f, 0.3f);
+        float z = Random.Range(-0.3f, 0.3f);
+        rigidbody.AddForce(new Vector3(x*rigidbody.mass, y*rigidbody.mass, z*rigidbody.mass));
+        if(rigidbody.velocity.y > 0.3)
+        {
+            for(int i = 0; i < 100; i++)
+            {
+                Mathf.Lerp(rigidbody.velocity.y, -0.5f, 0.1f);
+            }
+
+        }
+        if(hit && invincibilityFrames > 0)
+        {
+            invincibilityFrames--;
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6)
+        { // collided with player
+            if(invincibilityFrames == 0)
+            {
+                Debug.Log("hit");
+                hp--;
+                invincibilityFrames = 30;
+                hit = true;
+                if (hp == 0)
+                {
+                    Debug.Log("dead");
+                }
+            }
+            
+        }
+    }
+
 
     public IEnumerator Cycle()
     {
