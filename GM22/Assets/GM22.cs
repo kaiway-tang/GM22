@@ -62,6 +62,24 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CamLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9927777-50e0-4515-81df-c65e3aea3d6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Execute"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd918ad8-83dd-4c54-a189-73a3288084a6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -315,6 +333,28 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1915b459-dffb-4819-a497-a5c5bccea894"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CamLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58f30e9d-bf25-44b4-8266-768a411f654c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Execute"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -906,6 +946,8 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_CamLock = m_Player.FindAction("CamLock", throwIfNotFound: true);
+        m_Player_Execute = m_Player.FindAction("Execute", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -981,6 +1023,8 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_CamLock;
+    private readonly InputAction m_Player_Execute;
     public struct PlayerActions
     {
         private @GM22 m_Wrapper;
@@ -989,6 +1033,8 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @CamLock => m_Wrapper.m_Player_CamLock;
+        public InputAction @Execute => m_Wrapper.m_Player_Execute;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1010,6 +1056,12 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @CamLock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamLock;
+                @CamLock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamLock;
+                @CamLock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamLock;
+                @Execute.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
+                @Execute.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
+                @Execute.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1026,6 +1078,12 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @CamLock.started += instance.OnCamLock;
+                @CamLock.performed += instance.OnCamLock;
+                @CamLock.canceled += instance.OnCamLock;
+                @Execute.started += instance.OnExecute;
+                @Execute.performed += instance.OnExecute;
+                @Execute.canceled += instance.OnExecute;
             }
         }
     }
@@ -1186,6 +1244,8 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnCamLock(InputAction.CallbackContext context);
+        void OnExecute(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

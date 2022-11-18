@@ -4,11 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(LineRenderer))]
 public class LaserBeam : MonoBehaviour
 {
-
-    public float laserWidth = 1.0f;
     public float noise = 1.0f;
     public float maxLength = 50.0f;
-    public Color color = Color.red;
 
 
     LineRenderer lineRenderer;
@@ -16,9 +13,8 @@ public class LaserBeam : MonoBehaviour
     Vector3[] position;
     //Cache any transforms here
     Transform myTransform;
-    Transform endEffectTransform;
     //The particle system, in this case sparks which will be created by the Laser
-    public ParticleSystem endEffect;
+    private ParticleSystem endEffect;
     Vector3 offset;
 
 
@@ -26,12 +22,9 @@ public class LaserBeam : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.SetWidth(laserWidth, laserWidth);
         myTransform = transform;
         offset = new Vector3(0, 0, 0);
         endEffect = GetComponentInChildren<ParticleSystem>();
-        if (endEffect)
-            endEffectTransform = endEffect.transform;
     }
 
     // Update is called once per frame
@@ -45,8 +38,7 @@ public class LaserBeam : MonoBehaviour
 
         //Shoot our laserbeam forwards!
         UpdateLength();
-
-        lineRenderer.SetColors(color, color);
+        
         //Move through the Array
         for (int i = 0; i < length; i++)
         {

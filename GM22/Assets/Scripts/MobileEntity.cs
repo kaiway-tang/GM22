@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class MobileEntity : HPEntity
 {
     [SerializeField] protected Rigidbody rb;
-    public Transform trfm;
     Vector3 vect3;
 
     
@@ -48,6 +47,14 @@ public class MobileEntity : HPEntity
         rb.velocity = vect3;
     }
     
+    protected void SetFwdVel(float spd)
+    {
+        vect3.x = trfm.forward.x * spd;
+        vect3.y = rb.velocity.y;
+        vect3.z = trfm.forward.z * spd;
+
+        rb.velocity = vect3;
+    }
 
     protected void AddXVel(float amount, float max = float.PositiveInfinity)
     {
@@ -56,12 +63,31 @@ public class MobileEntity : HPEntity
     }
     protected void AddYVel(float amount, float max = float.PositiveInfinity)
     {
-        SetYVel(rb.velocity.y + amount);
+        vect3.x = 0;
+        vect3.y = amount;
+        vect3.z = 0;
+        rb.velocity += vect3;
+
         if ((amount > 0 && rb.velocity.y > max) || amount < 0 && rb.velocity.y < max) { SetYVel(max); }
     }
     protected void AddZVel(float amount, float max = float.PositiveInfinity)
     {
         SetZVel(rb.velocity.z + amount);
         if ((amount > 0 && rb.velocity.z > max) || amount < 0 && rb.velocity.z < max) { SetZVel(max); }
+    }
+    protected void AddFwdVel(float amount, float max = float.PositiveInfinity)
+    {
+        vect3.x = rb.velocity.x + trfm.forward.x * amount;
+        vect3.y = rb.velocity.y;
+        vect3.z = rb.velocity.z + trfm.forward.z * amount;
+
+        if (vect3.x * vect3.x + vect3.z * vect3.z < amount * amount)
+        {
+            rb.velocity += vect3;
+        }
+        else
+        {
+            SetFwdVel(max);
+        }
     }
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] int HP, maxHP, entityID;
+    public int HP, maxHP, entityID;
+    const int enemy = 0, player = 1;
     [SerializeField] GameObject hitFX;
-    [SerializeField] public Transform trfm;
+    public Transform trfm;
+    public float damageReduction;
+    public bool invulnerable;
 
     protected void Start()
     {
@@ -15,9 +18,19 @@ public class HPEntity : MonoBehaviour
 
     public void TakeDmg(int amount, int ignoreID = -1)
     {
-        if (ignoreID == entityID) { return; }
+        if (ignoreID == entityID || invulnerable) { return; }
         if (hitFX) { Instantiate(hitFX, trfm.position, trfm.rotation); }
-        HP -= amount;
+
+        if (entityID == enemy)
+        {
+            RageManager.AddRage(10);
+        }
+        else if (entityID == player)
+        {
+            RageManager.AddRage(-20);
+        }
+
+        HP -= Mathf.RoundToInt(amount*(1-damageReduction));
         if (HP <= 0)
         {
             Die();
@@ -41,8 +54,20 @@ public class HPEntity : MonoBehaviour
         }
     }
 
-    protected void Die()
+    bool died = false;
+    public void Die(bool dropCore = false)
     {
+        if (entityID == enemy && !died)
+        {
+            died = true;
+            GetComponent<EnemyShatter>().Shatter(dropCore);
+        } else if (entityID == player)
+        {
+            UIManager.self.rToRestart.SetActive(true);
+            GameManager.self.PlayerDied();
+            gameObject.SetActive(false);
+            return;
+        }
         Destroy(gameObject);
     }
 }

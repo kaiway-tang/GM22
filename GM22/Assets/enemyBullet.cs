@@ -5,13 +5,13 @@ using UnityEngine;
 public class enemyBullet : Attack
 {
     [SerializeField] Transform trfm;
-    [SerializeField] float spd;
+    [SerializeField] float spd, life;
     [SerializeField] GameObject bulletHitFX;
 
     private void Start()
     {
         GameManager.FacePlayer(trfm, true);
-        Destroy(gameObject, 4);
+        Destroy(gameObject, life);
     }
 
     private void FixedUpdate()

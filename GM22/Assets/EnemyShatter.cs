@@ -6,15 +6,21 @@ public class EnemyShatter : MonoBehaviour
 {
     [SerializeField] GameObject shatteredEnemy;
     [SerializeField] GameObject core;
-    bool died = false;
-    private void OnTriggerEnter(Collider other)
+    //bool died = false;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == 6 && !died)
+    //    { // collided with player
+    //        died = true;
+    //        Instantiate(shatteredEnemy, transform.position, Quaternion.identity);
+    //        Instantiate(core, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    public void Shatter(bool dropCore = false)
     {
-        if (other.gameObject.layer == 6 && !died)
-        { // collided with player
-            died = true;
-            Instantiate(shatteredEnemy, transform.position, Quaternion.identity);
-            Instantiate(core, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            Destroy(gameObject);
-        }
+        Instantiate(shatteredEnemy, transform.position, Quaternion.identity);
+        if (dropCore) { Instantiate(core, transform.position + new Vector3(0, 1, 0), Quaternion.identity); }
     }
 }

@@ -10,7 +10,7 @@ public class GroundStrike : MonoBehaviour
     [SerializeField] float detectionDistance = 5f;
     [SerializeField] LayerMask layers;
 
-    [SerializeField] float slowRate = 0.1f;
+    [SerializeField] public float slowRate = 0.1f;
 
     Rigidbody rb;
 

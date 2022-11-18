@@ -10,6 +10,8 @@ public class UIObj : MonoBehaviour
     [SerializeField] protected Transform UIParent, bracket;
     [SerializeField] protected bool isTouching, touchingUpdated, adjust, doDisable;
     [SerializeField] Vector2 dimensions; //halved dimensions
+    [SerializeField] GameObject slashObj;
+    [SerializeField] Vector2 offset;
     [SerializeField] protected Transform trfm;
     protected void OnEnable()
     {
@@ -36,6 +38,13 @@ public class UIObj : MonoBehaviour
                 Application.Quit();
             }
         }
+    }
+
+    protected void doSlash()
+    {
+        Transform slashFX = Instantiate(slashObj, trfm.position + trfm.right * offset.x + trfm.up * offset.y, trfm.rotation).transform;
+        slashFX.parent = UIParent;
+        slashFX.Rotate(Vector3.forward * 15);
     }
 
     IEnumerator unscaledFU()

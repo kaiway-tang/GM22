@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] int damage;
+    [SerializeField] public int damage;
 
     protected void OnTriggerEnter(Collider col)
     {
@@ -21,6 +21,11 @@ public class Attack : MonoBehaviour
         else if (col.gameObject.layer == 11)
         {
             col.GetComponent<HPEntity>().TakeDmg(damage);
+            return true;
+        }else if (col.gameObject.GetComponent<Core>() != null)
+        {
+            GameManager.playerControllerScr.AddCrystal(col.gameObject.GetComponent<Core>().crystalType);
+            Destroy(col.gameObject);
             return true;
         }
         return false;

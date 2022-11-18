@@ -11,26 +11,11 @@ public class Core : MonoBehaviour
     [SerializeField] int hp = 3;
     int invincibilityFrames = 30;
     bool hit;
-    // Start is called before the first frame update
+    public int crystalType; 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = false;
-
-        //rainbow effect
-        mt = gameObject.GetComponentInChildren<MeshRenderer>().material;
-        colors = new Color32[7]
-        {
-            new Color32(0, 245, 255, 255), //sky blue
-            new Color32(0, 155, 255, 255), //dark blue
-            new Color32(0, 17, 113, 255), // super dark blue
-            new Color32(0, 6, 39, 255), // almost black
-            new Color32(0, 17, 113, 255), // super dark blue
-            new Color32(0, 155, 255, 255), //dark blue
-            new Color32(0, 245, 255, 255), //sky blue
-
-        };
-        StartCoroutine(Cycle());
     }
 
     // Update is called once per frame
