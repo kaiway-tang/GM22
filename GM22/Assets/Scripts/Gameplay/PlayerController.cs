@@ -42,6 +42,10 @@ public class PlayerController : MobileEntity
     int combo = 0;
     bool sprinting = false;
     bool zLocked = false;
+    bool sliding = false;
+    [SerializeField] float slideSpeed = 10f;
+    float slideCooldown = 3f;
+    float cooldown = 0;
     [SerializeField] float maxTimeBetweenCombo = 0.6f;
     [SerializeField] float sprintModifier = 2f;
     float comboTimer = 0;
@@ -123,28 +127,37 @@ public class PlayerController : MobileEntity
 
             if (sprinting) totSpeed *= sprintModifier;
 
-            // Always face direction of movement, unless you're locked
-            if (zLocked)
+            if (!sliding)
             {
-                anim.SetFloat("horiMove", moveInputAction.ReadValue<Vector2>().x);
-                anim.SetFloat("vertMove", moveInputAction.ReadValue<Vector2>().y);
-                transform.forward = (zLockTarget.position - transform.position).normalized;
-            }
-            else
-            {
-                if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
-            }
+                // Always face direction of movement, unless you're locked
+                if (zLocked)
+                {
+                    anim.SetFloat("horiMove", moveInputAction.ReadValue<Vector2>().x);
+                    anim.SetFloat("vertMove", moveInputAction.ReadValue<Vector2>().y);
+                    transform.forward = (zLockTarget.position - transform.position).normalized;
+                }
+                else
+                {
+                    if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
+                }
 
-            // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
-            if (!notMoving)
-                rb.velocity = new Vector3(direction.x * totSpeed, rb.velocity.y, direction.z * totSpeed);
-            else
-                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
+                // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
+                if (!notMoving)
+                    rb.velocity = new Vector3(direction.x * totSpeed, rb.velocity.y, direction.z * totSpeed);
+                else
+                    rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
         } else
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
         rb.angularVelocity = Vector3.zero;
+
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
 
         // Control animations
         anim.SetBool("Moving", rb.velocity.magnitude - rb.velocity.y > 0.05f);
@@ -188,6 +201,11 @@ public class PlayerController : MobileEntity
         }
 
         sprinting = sprintInputAction.IsPressed();
+
+        if (sprintInputAction.triggered && cooldown <= 0)
+        {
+            anim.Play("Slide");
+        }
 
         // True or false based on if it's pressed the current frame
         if (attackInputAction.IsPressed())
@@ -387,12 +405,18 @@ public class PlayerController : MobileEntity
 
     public void StartSlide()
     {
-
+        Vector3 direction = new Vector3(moveInputAction.ReadValue<Vector2>().x, 0, moveInputAction.ReadValue<Vector2>().y);
+        rb.velocity = new Vector3(direction.x * slideSpeed, rb.velocity.y, direction.z * slideSpeed);
+        sliding = true;
+        invulnerable = true;
     }
 
     public void StopSlide()
     {
-
+        sliding = false;
+        invulnerable = false;
+        rb.velocity = Vector3.zero;
+        cooldown = slideCooldown;
     }
 
     public void SpawnStrike()
