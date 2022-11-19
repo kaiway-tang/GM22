@@ -16,22 +16,32 @@ public class Core : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = false;
+
+        //rainbow effect
+        mt = gameObject.GetComponentInChildren<MeshRenderer>().material;
+        colors = new Color32[7]
+        {
+            new Color32(0, 245, 255, 255), //sky blue
+            new Color32(0, 155, 255, 255), //dark blue
+            new Color32(0, 17, 113, 255), // super dark blue
+            new Color32(0, 6, 39, 255), // almost black
+            new Color32(0, 17, 113, 255), // super dark blue
+            new Color32(0, 155, 255, 255), //dark blue
+            new Color32(0, 245, 255, 255), //sky blue
+
+        };
+        StartCoroutine(Cycle());
     }
 
     // Update is called once per frame
     void Update()
     {
         float x = Random.Range(-0.3f, 0.3f);
-        float y = Random.Range(-0.3f, 0.3f);
         float z = Random.Range(-0.3f, 0.3f);
-        rigidbody.AddForce(new Vector3(x*rigidbody.mass, y*rigidbody.mass, z*rigidbody.mass));
-        if(rigidbody.velocity.y > 0.3)
+        rigidbody.AddForce(new Vector3(x*rigidbody.mass, 0, z*rigidbody.mass));
+        if(rigidbody.velocity.y > 0.05)
         {
-            for(int i = 0; i < 100; i++)
-            {
-                Mathf.Lerp(rigidbody.velocity.y, -0.5f, 0.1f);
-            }
-
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x, -0.05f, rigidbody.velocity.z);
         }
         if(hit && invincibilityFrames > 0)
         {

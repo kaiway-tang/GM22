@@ -11,6 +11,7 @@ public class PlayerController : MobileEntity
     private GM22 inputs;
     private InputAction attackInputAction;
     private InputAction moveInputAction;
+    private InputAction jumpInputAction;
 
     private InputAction sprintInputAction;
     private InputAction camlockInputAction;
@@ -74,6 +75,7 @@ public class PlayerController : MobileEntity
     {
         inputs = new GM22();
         attackInputAction = inputs.Player.Attack;
+        jumpInputAction = inputs.Player.Jump;
         moveInputAction = inputs.Player.Move;
         sprintInputAction = inputs.Player.Sprint;
         camlockInputAction = inputs.Player.CamLock;
@@ -224,7 +226,25 @@ public class PlayerController : MobileEntity
         }
 
         chargeFX.SetInt("chargeLevel", charge);
+
+        if (jumpInputAction.triggered)
+        {
+            anim.Play("Jump");
+            Debug.Log("jump");
+            //anim.SetBool("Combo", true);
+            //if (comboTimer > 0)
+            //{
+            //    combo++;
+            //    if (combo > 2) combo = 0;
+            //    comboTimer = 0;
+            //}
+            //anim.SetInteger("ComboCount", combo);
+            //rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            // SpawnStrike();  // Purely testing
+        }
+
     }
+
 
     public void AddCrystal(int type)
     {

@@ -80,6 +80,15 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecc667f0-ac2b-43db-b349-564f973550f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -355,6 +364,17 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Execute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59b0f4c0-d428-43d5-9f2b-fddc6cf01532"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -948,6 +968,7 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CamLock = m_Player.FindAction("CamLock", throwIfNotFound: true);
         m_Player_Execute = m_Player.FindAction("Execute", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1025,6 +1046,7 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CamLock;
     private readonly InputAction m_Player_Execute;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @GM22 m_Wrapper;
@@ -1035,6 +1057,7 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CamLock => m_Wrapper.m_Player_CamLock;
         public InputAction @Execute => m_Wrapper.m_Player_Execute;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1062,6 +1085,9 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Execute.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
                 @Execute.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
                 @Execute.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExecute;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1084,6 +1110,9 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
                 @Execute.started += instance.OnExecute;
                 @Execute.performed += instance.OnExecute;
                 @Execute.canceled += instance.OnExecute;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -1246,6 +1275,7 @@ public partial class @GM22 : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnCamLock(InputAction.CallbackContext context);
         void OnExecute(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
