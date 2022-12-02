@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
         if (!gamePaused)
         {
-            SpawnWaves();
+            //SpawnWaves();
         }
     }
 
