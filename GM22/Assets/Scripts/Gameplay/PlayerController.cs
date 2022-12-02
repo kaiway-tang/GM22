@@ -17,7 +17,7 @@ public class PlayerController : MobileEntity
     private InputAction camlockInputAction;
     
     Animator anim;
-    [SerializeField] float speed = 5f;
+    [SerializeField] float speed = 20f;
 
     [Tooltip("The mesh object that is moving in the animations. We use this to set the position of the transform.")]
     [SerializeField] GameObject animObject;
@@ -51,6 +51,7 @@ public class PlayerController : MobileEntity
     [SerializeField] float sprintModifier = 2f;
     float comboTimer = 0;
 
+    // jumping variables
     bool onGround = false;
     bool jumpDesired = false;
 
