@@ -57,7 +57,7 @@ public class PlayerController : MobileEntity
     [SerializeField] float attackSpeed = 1;
     [SerializeField] float moveSpeed = 1;
     [SerializeField] float healthBoost = 1;
-    List<int> crystals;
+    [SerializeField] List<int> crystals;
 
     [SerializeField] private skillPointManager skillPointManager;
 
@@ -73,6 +73,7 @@ public class PlayerController : MobileEntity
         crystals.Add(0);  // red
         crystals.Add(0);  // green
         crystals.Add(0);  // blue
+        Debug.Log("Hello");
     }
 
     private void OnEnable()
@@ -98,27 +99,27 @@ public class PlayerController : MobileEntity
         
         CalculateBuffs();
 
-        if (camlockInputAction.triggered)
-        {
-            zLocked = !zLocked;
-            if (zLocked)
-            {
-                targetCam.ZTarget(closestEnemy.gameObject);
-                zLockTarget = closestEnemy;
-            }
-        }
+        //if (camlockInputAction.triggered)
+        //{
+        //    zLocked = !zLocked;
+        //    if (zLocked)
+        //    {
+        //        targetCam.ZTarget(closestEnemy.gameObject);
+        //        zLockTarget = closestEnemy;
+        //    }
+        //}
 
-        if (closestEnemy == null)
-            zLocked = false;
+        //if (closestEnemy == null)
+        //    zLocked = false;
 
-        if (!zLocked)
-            targetCam.Normal();
-        anim.SetBool("zLocked", zLocked);
+        //if (!zLocked)
+        //    targetCam.Normal();
+        //anim.SetBool("zLocked", zLocked);
+
         // Bulk of gameplay code below
 
-        if (!swinging)
+        if (true)  // Previously had swing check, no longer necessary
         {
-            // Using isometric to test, will change later
             
             Vector3 camDir = new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z);
             Vector3 direction = (moveInputAction.ReadValue<Vector2>().x * new Vector3(camDir.z, 0, -1 * camDir.x) + moveInputAction.ReadValue<Vector2>().y * camDir).normalized;
@@ -134,6 +135,7 @@ public class PlayerController : MobileEntity
                 // Always face direction of movement, unless you're locked
                 if (zLocked)
                 {
+                    // Note: New version of code does not have camera locking 
                     anim.SetFloat("horiMove", moveInputAction.ReadValue<Vector2>().x);
                     anim.SetFloat("vertMove", moveInputAction.ReadValue<Vector2>().y);
                     transform.forward = (zLockTarget.position - transform.position).normalized;
@@ -143,8 +145,7 @@ public class PlayerController : MobileEntity
                     if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
                 }
 
-
-                // Assume no vertical movement/gravity as of rn (so y velocity ALWAYS 0)
+                Debug.Log(direction.magnitude);
                 if (!notMoving)
                     rb.velocity = new Vector3(direction.x * totSpeed, rb.velocity.y, direction.z * totSpeed);
                 else
@@ -170,6 +171,7 @@ public class PlayerController : MobileEntity
             anim.SetFloat("moveSpeed", moveSpeed);
 
         // Control combo state
+        /*
         AnimatorStateInfo curState = anim.GetCurrentAnimatorStateInfo(0);
         // Only count down when player is not swinging
         if (comboTimer > 0 && (curState.IsName("Idle") || curState.IsName("Run")))
@@ -182,14 +184,17 @@ public class PlayerController : MobileEntity
                 anim.SetBool("Combo", false);
             }
         }
+        */
 
         if (inputs.Player.Execute.triggered && RageManager.rage == 100)
         {
-            anim.Play("Execute");
+            // No longer doing execute attack
+            // anim.Play("Execute");
         }
 
         if (attackInputAction.triggered)
         {
+            /*
             anim.SetBool("Combo", true);
             if (comboTimer > 0)
             {
@@ -200,7 +205,11 @@ public class PlayerController : MobileEntity
             anim.SetInteger("ComboCount", combo);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             // SpawnStrike();  // Purely testing
+            */
+            anim.SetBool("Combo", true);
         }
+
+        /*
 
         sprinting = sprintInputAction.IsPressed();
 
@@ -208,6 +217,8 @@ public class PlayerController : MobileEntity
         {
             anim.Play("Slide");
         }
+
+        
 
         // True or false based on if it's pressed the current frame
         if (attackInputAction.IsPressed())
@@ -217,7 +228,7 @@ public class PlayerController : MobileEntity
             {
                 int old = charge;
                 anim.SetBool("Charge", true);
-                charge = (int) ((holdTime - holdTimeForCharge) / timePerChargePhase);
+                charge = (int)((holdTime - holdTimeForCharge) / timePerChargePhase);
                 if (charge > maxStage)
                 {
                     charge = maxStage;
@@ -231,19 +242,23 @@ public class PlayerController : MobileEntity
                 }
             }
             // Debug.Log(holdTime);
-        } else
+        }
+        else
         {
             if (holdTime > holdTimeForCharge)
             {
                 anim.SetBool("Charge", false);
                 holdTime = 0;
-            } else if (holdTime != 0)
+            }
+            else if (holdTime != 0)
             {
                 holdTime = 0;
             }
         }
 
-        chargeFX.SetInt("chargeLevel", charge);
+        */
+
+        // chargeFX.SetInt("chargeLevel", charge);
 
         if (jumpInputAction.triggered)
         {
@@ -309,10 +324,11 @@ public class PlayerController : MobileEntity
         attackSpeed = (blue) * 0.2f + 1f;
         moveSpeed = (blue) * 0.2f + 1f;
         healthBoost = (green) * 0.2f + 1f;
-        
+        /*
         skillPointManager.SetAttack(damageMult);
         skillPointManager.SetSpeed(attackSpeed);
         skillPointManager.SetHP(healthBoost);
+        */
     }
 
     void CheckForEnemies()
