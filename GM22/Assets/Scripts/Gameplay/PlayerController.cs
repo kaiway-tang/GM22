@@ -262,18 +262,7 @@ public class PlayerController : MobileEntity
 
         if (jumpInputAction.triggered)
         {
-            anim.Play("Jump");
-            Debug.Log("jump");
-            //anim.SetBool("Combo", true);
-            //if (comboTimer > 0)
-            //{
-            //    combo++;
-            //    if (combo > 2) combo = 0;
-            //    comboTimer = 0;
-            //}
-            //anim.SetInteger("ComboCount", combo);
-            //rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            // SpawnStrike();  // Purely testing
+            anim.SetTrigger("Jumping");
         }
 
     }
