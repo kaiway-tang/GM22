@@ -51,6 +51,8 @@ public class PlayerController : MobileEntity
     [SerializeField] float sprintModifier = 2f;
     float comboTimer = 0;
 
+    bool onGround = false;
+    bool jumpDesired = false;
 
     // Player stats
     [SerializeField] float damageMult = 1; 
@@ -163,7 +165,7 @@ public class PlayerController : MobileEntity
         }
 
         // Control animations
-        anim.SetBool("Moving", rb.velocity.magnitude - rb.velocity.y > 0.05f);
+        anim.SetBool("Moving", Mathf.Abs(rb.velocity.x) > 0.05f || Mathf.Abs(rb.velocity.z) > 0.05f) ;
         anim.SetFloat("atkSpeed", attackSpeed);
         if (sprinting)
             anim.SetFloat("moveSpeed", moveSpeed * sprintModifier);
@@ -208,7 +210,10 @@ public class PlayerController : MobileEntity
             */
             anim.SetBool("Combo", true);
         }
-
+        if (jumpInputAction.triggered)
+        {
+            jumpDesired = true;
+        }
         /*
 
         sprinting = sprintInputAction.IsPressed();
@@ -260,15 +265,23 @@ public class PlayerController : MobileEntity
 
         // chargeFX.SetInt("chargeLevel", charge);
 
-        if (jumpInputAction.triggered)
-        {
-            anim.SetTrigger("Jumping");
-            rb.velocity += new Vector3(0, 3, 0);
-        }
-
     }
 
-
+    private void FixedUpdate()
+    {
+        Debug.Log("onGround " + onGround);
+        if (jumpDesired)
+        {
+            jumpDesired = false;
+            if (onGround)
+            {
+                onGround = false;
+                anim.SetTrigger("Jumping");
+                rb.velocity += new Vector3(0, 5, 0);
+            }
+        }
+        onGround = false;
+    }
     public void AddCrystal(int type)
     {
         crystals[type]++;
@@ -521,5 +534,29 @@ public class PlayerController : MobileEntity
         chargeGlow.SetColor("_Color", glowColors[0]);
     }
 
+
     #endregion
+    void OnCollisionEnter(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void EvaluateCollision(Collision collision)
+    {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            Vector3 normal = collision.GetContact(i).normal;
+            float upDot = Vector3.Dot(trfm.up, normal);
+            float minGroundDotProduct = Mathf.Cos(25f * Mathf.Deg2Rad);
+            if (upDot >= minGroundDotProduct)
+            {
+                onGround = true;
+            }
+        }
+    }
 }
