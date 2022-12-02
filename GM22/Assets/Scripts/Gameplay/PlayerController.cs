@@ -263,6 +263,7 @@ public class PlayerController : MobileEntity
         if (jumpInputAction.triggered)
         {
             anim.SetTrigger("Jumping");
+            rb.velocity += new Vector3(0, 3, 0);
         }
 
     }
