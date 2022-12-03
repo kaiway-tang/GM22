@@ -3390,7 +3390,8 @@ MonoBehaviour:
   damageReduction: 0
   invulnerable: 0
   rb: {fileID: 2634577695745443967}
-  speed: 12
+  speed: 5
+  chargeSpdMultiplier: 1
   animObject: {fileID: 0}
   cam: {fileID: 0}
   targetCam: {fileID: 0}
@@ -7542,7 +7543,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8334604164378345803}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.5, y: 2.3268406, z: 0.88161343}
@@ -7559,7 +7560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!114 &6382684031779239994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7695,7 +7696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!4 &7961213779000005043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8945408548667478341, guid: 3bc7812249931304d846b79f0ce3e7e8, type: 3}
@@ -7953,7 +7954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!4 &6262070390138049389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8945408548667478341, guid: 3bc7812249931304d846b79f0ce3e7e8, type: 3}
@@ -8082,7 +8083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!4 &5940236243669290409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8945408548667478341, guid: 3bc7812249931304d846b79f0ce3e7e8, type: 3}
@@ -8414,7 +8415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!4 &2951191105052663001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8945408548667478341, guid: 3bc7812249931304d846b79f0ce3e7e8, type: 3}
@@ -8548,7 +8549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
 --- !u!1001 &8719330462498990745
 PrefabInstance:
   m_ObjectHideFlags: 0

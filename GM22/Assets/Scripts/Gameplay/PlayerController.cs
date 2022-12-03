@@ -17,7 +17,8 @@ public class PlayerController : MobileEntity
     private InputAction camlockInputAction;
     
     Animator anim;
-    [SerializeField] float speed = 20f;
+    [SerializeField] float speed = 5f, chargeSpdMultiplier = .25f;
+    bool chargeSlowed;
 
     [Tooltip("The mesh object that is moving in the animations. We use this to set the position of the transform.")]
     [SerializeField] GameObject animObject;
@@ -129,7 +130,7 @@ public class PlayerController : MobileEntity
             
             bool notMoving = direction.magnitude == 0;
 
-            float totSpeed = speed * moveSpeed;  // Base speed (speed) times speed multiplier (moveSpeed)
+            float totSpeed = speed * moveSpeed * chargeSpdMultiplier;  // Base speed (speed) times speed multiplier (moveSpeed)
 
             if (sprinting) totSpeed *= sprintModifier;
 
@@ -171,7 +172,7 @@ public class PlayerController : MobileEntity
         if (sprinting)
             anim.SetFloat("moveSpeed", moveSpeed * sprintModifier);
         else
-            anim.SetFloat("moveSpeed", moveSpeed);
+            anim.SetFloat("moveSpeed", moveSpeed * chargeSpdMultiplier);
 
         // Control combo state
         /*
@@ -229,6 +230,8 @@ public class PlayerController : MobileEntity
         // True or false based on if it's pressed the current frame
         if (attackInputAction.IsPressed())
         {
+            if (!chargeSlowed) { chargeSpdMultiplier = .6f; chargeSlowed = true; }
+
             holdTime += Time.deltaTime;
             if (holdTime > holdTimeForCharge)
             {
@@ -251,6 +254,8 @@ public class PlayerController : MobileEntity
         }
         else
         {
+            if (chargeSlowed) { chargeSpdMultiplier = 1 ; chargeSlowed = false; }
+
             if (holdTime > holdTimeForCharge)
             {
                 anim.SetBool("Charge", false);
@@ -502,7 +507,7 @@ public class PlayerController : MobileEntity
             {
                 slashVFX[i].SetActive(true);
             }
-            yield return new WaitForSeconds(.14f);
+            yield return new WaitForSeconds(.3f);
             for (int i = 0; i < n; i++)
             {
                 slashVFX[i].SetActive(false);
