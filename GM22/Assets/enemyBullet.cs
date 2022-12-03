@@ -7,10 +7,20 @@ public class enemyBullet : Attack
     [SerializeField] Transform trfm;
     [SerializeField] float spd, life;
     [SerializeField] GameObject bulletHitFX;
+    [SerializeField] GameObject strike;
+    [SerializeField] bool groundFissure = false;
 
     private void Start()
     {
         GameManager.FacePlayer(trfm, true);
+        if (groundFissure)
+        {
+            Instantiate(strike, trfm.position, trfm.rotation);
+            GameObject l1 = Instantiate(strike, trfm.position, trfm.rotation);
+            GameObject r1 = Instantiate(strike, trfm.position, trfm.rotation);
+            l1.transform.Rotate(Vector3.up, 15);
+            r1.transform.Rotate(Vector3.up, -15);
+        }
         Destroy(gameObject, life);
     }
 
