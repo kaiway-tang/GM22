@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 3960008124802247020}
+    - target: {fileID: 3227892163007035377, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: HPEntityScr
+      value: 
+      objectReference: {fileID: 1398013097111434129}
     - target: {fileID: 3579908564944310588, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
       propertyPath: _camTrfm
       value: 
@@ -128,11 +132,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.21
       objectReference: {fileID: 0}
+    - target: {fileID: 7955198870650505369, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 91723522268639244}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
 --- !u!1 &91723522268639242 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1365097988820540913, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
+  m_PrefabInstance: {fileID: 1419781145047936507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &91723522268639244 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1365097988820540919, guid: b47e1fb9ccee814458072a878fc1c975, type: 3}
   m_PrefabInstance: {fileID: 1419781145047936507}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &91723522299088976 stripped
