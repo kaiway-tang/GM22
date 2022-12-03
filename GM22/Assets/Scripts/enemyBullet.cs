@@ -9,6 +9,7 @@ public class enemyBullet : Attack
     [SerializeField] GameObject bulletHitFX;
     [SerializeField] GameObject strike;
     [SerializeField] bool groundFissure = false;
+    [SerializeField] [Tooltip("Set to true to spawn strike as a beam")] bool beam = false;
 
     private void Start()
     {
@@ -20,6 +21,10 @@ public class enemyBullet : Attack
             GameObject r1 = Instantiate(strike, trfm.position, trfm.rotation);
             l1.transform.Rotate(Vector3.up, 15);
             r1.transform.Rotate(Vector3.up, -15);
+        }
+        if (beam)
+        {
+            Instantiate(strike, trfm.position, trfm.rotation);
         }
         Destroy(gameObject, life);
     }
@@ -34,6 +39,7 @@ public class enemyBullet : Attack
         if (base.Hit(col))
         {
             Instantiate(bulletHitFX, trfm.position, trfm.rotation);
+
             Destroy(gameObject);
         }
     }

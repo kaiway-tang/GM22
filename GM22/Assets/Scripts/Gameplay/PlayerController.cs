@@ -503,11 +503,12 @@ public class PlayerController : MobileEntity
         }
         if (n >= 8)
         {
+            yield return new WaitForSeconds(.2f);
             for (int i = 0; i < n; i++)
             {
                 slashVFX[i].SetActive(true);
             }
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.5f);
             for (int i = 0; i < n; i++)
             {
                 slashVFX[i].SetActive(false);

@@ -3230,6 +3230,63 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.009298116, y: -0.072270125, z: 0.12601548}
     m_Extent: {x: 0.5734937, y: 0.8480648, z: 0.34559435}
   m_DirtyAABB: 0
+--- !u!1001 &432788777535590315
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1056865657756892062, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_Name
+      value: Rail Crab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469791639748201473, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29c9267d54fa6914dac9c8e6e417c654, type: 3}
 --- !u!4 &497831376444449851
 Transform:
   m_ObjectHideFlags: 0
@@ -6776,9 +6833,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6631729715465710148, guid: 5c2b7595efc3f3242a3c7a332390f552, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6631729715935100712, guid: 5c2b7595efc3f3242a3c7a332390f552, type: 3}
       propertyPath: m_Name
       value: vfx_laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631729715935100712, guid: 5c2b7595efc3f3242a3c7a332390f552, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6631729715935100713, guid: 5c2b7595efc3f3242a3c7a332390f552, type: 3}
       propertyPath: m_RootOrder
