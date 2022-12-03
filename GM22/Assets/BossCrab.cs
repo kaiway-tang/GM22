@@ -11,6 +11,10 @@ public class BossCrab : MonoBehaviour
 
     [SerializeField] private Material[] colors;
 
+    [SerializeField] private RuntimeAnimatorController[] animControllers;
+
+    private int num = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +22,11 @@ public class BossCrab : MonoBehaviour
         {
             controller.enabled = false;
         }
-
-        int num = Random.Range(0, controllers.Length);
+        
         controllers[num].enabled = true;
         antenna.material = colors[num];
         eye.material = colors[num];
+        GetComponent<Animator>().runtimeAnimatorController = num == 2 ? animControllers[1] : animControllers[0];
         StartCoroutine(chooseRandom());
     }
 
@@ -40,10 +44,12 @@ public class BossCrab : MonoBehaviour
             controller.enabled = false;
         }
 
-        int num = Random.Range(0, controllers.Length);
+        num++;
+        if (num > 2) num = 0;
         controllers[num].enabled = true;
         antenna.material = colors[num];
         eye.material = colors[num];
+        GetComponent<Animator>().runtimeAnimatorController = num == 2 ? animControllers[1] : animControllers[0];
         StartCoroutine(chooseRandom());
     }
 }

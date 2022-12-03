@@ -18,9 +18,9 @@ public class Laser : MonoBehaviour
         while (time < duration)
         {
             col.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             col.SetActive(false);
-            time += 0.5f;
+            time += 0.3f;
         }
         Destroy(gameObject);
     }

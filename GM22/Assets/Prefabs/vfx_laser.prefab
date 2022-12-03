@@ -232,4 +232,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 2407107976657019501}
-  duration: 6
+  duration: 1
