@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8913336866556679651}
   - component: {fileID: 7025583345962479324}
   m_Layer: 9
-  m_Name: meleeAttack
+  m_Name: meleeAttackStrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378bbb68927d6524a838a4c444e1a77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 40
   trfm: {fileID: 8913336866556679663}
   spd: 0.6
   life: 0.12

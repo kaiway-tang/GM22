@@ -33,6 +33,10 @@ public class HPEntity : MonoBehaviour
         HP -= Mathf.RoundToInt(amount*(1-damageReduction));
         if (HP <= 0)
         {
+            if (entityID == enemy) 
+            {
+                EnemySpawnerV2.spawnerScr.enemyDied();
+            }
             Die();
         }
     }
@@ -60,7 +64,7 @@ public class HPEntity : MonoBehaviour
         if (entityID == enemy && !died)
         {
             died = true;
-            GetComponent<EnemyShatter>().Shatter(dropCore);
+            if (dropCore) { GetComponent<EnemyShatter>().Shatter(dropCore); }
         } else if (entityID == player)
         {
             UIManager.self.rToRestart.SetActive(true);
