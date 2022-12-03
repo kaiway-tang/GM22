@@ -476,7 +476,7 @@ public class PlayerController : MobileEntity
         }
         else if (charge == 2)
         {
-            StartCoroutine(SpawnSlashes(4));
+            StartCoroutine(SpawnSlashes(6));
         } else
         {
             StartCoroutine(SpawnSlashes(8));
@@ -495,6 +495,18 @@ public class PlayerController : MobileEntity
         for (int i = 0; i < n; i++)
         {
             slashVFX[i].SetActive(false);
+        }
+        if (n >= 8)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                slashVFX[i].SetActive(true);
+            }
+            yield return new WaitForSeconds(.14f);
+            for (int i = 0; i < n; i++)
+            {
+                slashVFX[i].SetActive(false);
+            }
         }
     }
 
