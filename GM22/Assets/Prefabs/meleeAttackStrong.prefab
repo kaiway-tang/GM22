@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   trfm: {fileID: 8913336866556679663}
-  spd: 0.6
-  life: 0.12
+  spd: 0.7
+  life: 0.15
   bulletHitFX: {fileID: 3072392546844146685, guid: 24abe1120b677c94f9933a8fc8e0b09b, type: 3}
 --- !u!135 &7025583345962479324
 SphereCollider:
