@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa7d211f90a4a8e9cb5b56b9a28c196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 30
-  maxHP: 30
+  HP: 15
+  maxHP: 15
   entityID: 0
   hitFX: {fileID: 3072392546844146685, guid: d630c9697173b9945b6c3e9fd74433af, type: 3}
   trfm: {fileID: 0}

@@ -17,6 +17,7 @@ public class ShootingEnemy : Enemy
         if (GameManager.playerControllerScr == null) return;
 
         base.FixedUpdate();
+        anim.speed = 1;
         if (Vector3.SqrMagnitude(GameManager.playerControllerScr.trfm.position - trfm.position) < attackingRange - 1)
         {
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
@@ -43,6 +44,7 @@ public class ShootingEnemy : Enemy
 
     void Shoot()
     {
+        if(!enabled) return;
         Instantiate(projectile, trfm.position, trfm.rotation);
         rb.velocity = Vector3.zero;
     }
