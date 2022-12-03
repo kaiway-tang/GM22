@@ -55,6 +55,14 @@ public class MobileEntity : HPEntity
 
         rb.velocity = vect3;
     }
+    protected void SetRightVel(float spd)
+    {
+        vect3.x = trfm.right.x * spd;
+        vect3.y = rb.velocity.y;
+        vect3.z = trfm.right.z * spd;
+
+        rb.velocity = vect3;
+    }
 
     protected void AddXVel(float amount, float max = float.PositiveInfinity)
     {
@@ -88,6 +96,21 @@ public class MobileEntity : HPEntity
         else
         {
             SetFwdVel(max);
+        }
+    }
+    protected void AddRightVel(float amount, float max = float.PositiveInfinity)
+    {
+        vect3.x = rb.velocity.x + trfm.right.x * amount;
+        vect3.y = rb.velocity.y;
+        vect3.z = rb.velocity.z + trfm.right.z * amount;
+
+        if (vect3.x * vect3.x + vect3.z * vect3.z < amount * amount)
+        {
+            rb.velocity += vect3;
+        }
+        else
+        {
+            SetRightVel(max);
         }
     }
 }
