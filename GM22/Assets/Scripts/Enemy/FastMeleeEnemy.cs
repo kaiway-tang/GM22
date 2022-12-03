@@ -77,6 +77,7 @@ public class FastMeleeEnemy : Enemy
 
     void Shoot()
     {
+        if(!enabled) return;
         Instantiate(projectile, trfm.position, trfm.rotation);
         rb.velocity = Vector3.zero;
     }
