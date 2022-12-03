@@ -481,7 +481,7 @@ public class PlayerController : MobileEntity
         }
         else if (charge == 2)
         {
-            StartCoroutine(SpawnSlashes(6));
+            StartCoroutine(SpawnSlashes(4));
         } else
         {
             StartCoroutine(SpawnSlashes(8));
