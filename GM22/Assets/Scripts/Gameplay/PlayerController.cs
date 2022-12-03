@@ -215,15 +215,15 @@ public class PlayerController : MobileEntity
         {
             jumpDesired = true;
         }
-        /*
+        
 
         sprinting = sprintInputAction.IsPressed();
-
+        /*
         if (sprintInputAction.triggered && cooldown <= 0)
         {
             anim.Play("Slide");
         }
-
+        */
         
 
         // True or false based on if it's pressed the current frame
@@ -262,9 +262,8 @@ public class PlayerController : MobileEntity
             }
         }
 
-        */
 
-        // chargeFX.SetInt("chargeLevel", charge);
+        chargeFX.SetInt("chargeLevel", charge);
 
     }
 
@@ -278,7 +277,7 @@ public class PlayerController : MobileEntity
             {
                 onGround = false;
                 anim.SetTrigger("Jumping");
-                rb.velocity += new Vector3(0, 5, 0);
+                rb.velocity += new Vector3(0, 5, 0) * Physics.gravity.magnitude / 9.8f;
             }
         }
         onGround = false;
@@ -381,7 +380,13 @@ public class PlayerController : MobileEntity
 
     public void DeactivateSlash(int index)
     {
-        slashVFX[index].SetActive(false);
+        StartCoroutine(DeactivateWithDelay(slashVFX[index]));
+    }
+
+    IEnumerator DeactivateWithDelay(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.12f);
+        obj.SetActive(false);
     }
 
     public void ResetCombo()
@@ -457,6 +462,40 @@ public class PlayerController : MobileEntity
         invulnerable = false;
         rb.velocity = Vector3.zero;
         cooldown = slideCooldown;
+    }
+
+    public void SpawnSlash()
+    {
+        if (charge == 0) {
+            slashVFX[5].SetActive(true);
+            slashVFX[5].SetActive(false);
+        }
+        else if (charge == 1)
+        {
+            StartCoroutine(SpawnSlashes(2));
+        }
+        else if (charge == 2)
+        {
+            StartCoroutine(SpawnSlashes(4));
+        } else
+        {
+            StartCoroutine(SpawnSlashes(8));
+        }
+        charge = 0;
+        chargeGlow.SetColor("_Color", glowColors[0]);
+    }
+
+    IEnumerator SpawnSlashes(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            slashVFX[i].SetActive(true);
+            yield return new WaitForSeconds(.09f);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            slashVFX[i].SetActive(false);
+        }
     }
 
     public void SpawnStrike()
