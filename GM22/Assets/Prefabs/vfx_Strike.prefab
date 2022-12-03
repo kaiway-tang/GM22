@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb0890cbc303b74e99a70d6f8069dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 40
   detectionDistance: 5
   layers:
     serializedVersion: 2
@@ -159,8 +159,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 3.985485, z: 3.0607448}
-  m_Center: {x: 0, y: 1.93, z: 0}
+  m_Size: {x: 0.4, y: 3.985485, z: 2}
+  m_Center: {x: 0, y: 1.93, z: 0.2}
 --- !u!114 &1284766307467042077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9f1dd0d60d28468fc4b733b7a002c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 60
 --- !u!1 &8968412139518979475
 GameObject:
   m_ObjectHideFlags: 0

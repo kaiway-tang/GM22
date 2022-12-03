@@ -89,7 +89,7 @@ public class EnemySpawnerV2 : MonoBehaviour
                     spawnQue--;
                 }
             }
-            if (time%spawnRate == 0)
+            if (time%15 == 0)
             {
                 spawnQue++;
                 if (spawnRate > 2)
