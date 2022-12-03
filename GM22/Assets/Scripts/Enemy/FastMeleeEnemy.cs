@@ -12,6 +12,7 @@ public class FastMeleeEnemy : Enemy
     protected new void Start()
     {
         base.Start();
+        rushTimer = rushCooldown;
     }
 
     // Update is called once per frame
