@@ -146,7 +146,7 @@ public class PlayerController : MobileEntity
                 }
                 else
                 {
-                    if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.9f);
+                    if (!notMoving) transform.forward = Vector3.Lerp(transform.forward, direction, 0.1f);
                 }
 
                 Debug.Log(direction.magnitude);
